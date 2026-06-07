@@ -1,0 +1,383 @@
+/* Holly's Pantry — rustic, restrained, no kitsch */
+
+:root {
+  --cream: #F4EDE0;
+  --cream-deep: #EADFCB;
+  --forest: #3C4A3E;
+  --forest-deep: #2A3530;
+  --rust: #A0522D;
+  --rust-deep: #7E3F22;
+  --charcoal: #2B2B2B;
+  --hairline: rgba(43, 43, 43, 0.18);
+  --max-w: 1080px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--charcoal);
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(rgba(43,43,43,0.04) 1px, transparent 1px),
+    radial-gradient(rgba(43,43,43,0.03) 1px, transparent 1px);
+  background-size: 24px 24px, 17px 17px;
+  background-position: 0 0, 12px 8px;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  color: var(--forest-deep);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 500; }
+h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 0.5rem; }
+h3 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+
+p { margin-bottom: 1rem; }
+
+a {
+  color: var(--rust-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s ease;
+}
+a:hover { color: var(--rust); }
+
+/* Layout */
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header / Nav */
+.site-header {
+  border-bottom: 1px solid var(--hairline);
+  padding: 1.5rem 0;
+  background-color: var(--cream);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.brand {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--forest-deep);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.brand .amp { color: var(--rust); font-style: italic; }
+
+.nav {
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.nav a {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--charcoal);
+  letter-spacing: 0.02em;
+}
+
+.nav a:hover, .nav a.active {
+  color: var(--rust-deep);
+  border-bottom: 1px solid var(--rust);
+  padding-bottom: 2px;
+}
+
+/* Hero */
+.hero {
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.hero .lede {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-style: italic;
+  color: var(--forest);
+  max-width: 38rem;
+  margin-top: 1rem;
+}
+
+/* Sections */
+section { padding: 3rem 0; border-bottom: 1px solid var(--hairline); }
+section:last-of-type { border-bottom: none; }
+
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+/* This Week callout */
+.this-week {
+  background-color: var(--cream-deep);
+  border-left: 3px solid var(--rust);
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  max-width: 38rem;
+}
+
+.this-week h3 { color: var(--rust-deep); margin-bottom: 0.5rem; }
+
+/* Hours grid */
+.hours {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem 2rem;
+  margin-top: 1.5rem;
+  max-width: 38rem;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--hairline);
+  padding-bottom: 0.4rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+}
+
+.hours-row .day { font-weight: 500; }
+.hours-row .time { color: var(--forest); }
+
+/* Contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.contact-card {
+  border: 1px solid var(--hairline);
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.contact-card .label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--forest);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.contact-card a {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: var(--forest-deep);
+}
+
+.contact-card a:hover { color: var(--rust-deep); }
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.product {
+  border: 1px solid var(--hairline);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.product .photo {
+  aspect-ratio: 4 / 3;
+  background-color: var(--cream-deep);
+  background-image:
+    linear-gradient(45deg, rgba(160,82,45,0.08) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(160,82,45,0.08) 25%, transparent 25%);
+  background-size: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--forest);
+  opacity: 0.6;
+}
+
+.product .info { padding: 1.25rem 1.25rem 1.5rem; }
+.product h3 { margin-bottom: 0.25rem; }
+.product .price {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--rust-deep);
+}
+.product .desc { font-size: 0.95rem; margin-top: 0.5rem; color: var(--charcoal); opacity: 0.85; }
+
+.category-header {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--hairline);
+}
+.category-header:first-of-type { border-top: none; margin-top: 1rem; padding-top: 0; }
+
+/* Buttons / CTAs */
+.btn {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--forest-deep);
+  background-color: var(--forest-deep);
+  color: var(--cream);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn:hover {
+  background-color: var(--rust-deep);
+  border-color: var(--rust-deep);
+  color: var(--cream);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--forest-deep);
+}
+
+.btn-ghost:hover {
+  background-color: var(--forest-deep);
+  color: var(--cream);
+}
+
+/* Bottom CTA strip — appears on every page */
+.cta-strip {
+  background-color: var(--forest-deep);
+  color: var(--cream);
+  padding: 3.5rem 0;
+  text-align: center;
+  border-bottom: none;
+}
+
+.cta-strip h2 { color: var(--cream); margin-bottom: 1rem; }
+.cta-strip p {
+  max-width: 38rem;
+  margin: 0 auto 1.75rem;
+  opacity: 0.9;
+  font-style: italic;
+}
+
+.cta-strip .btn {
+  background-color: var(--rust);
+  border-color: var(--rust);
+  color: var(--cream);
+}
+.cta-strip .btn:hover {
+  background-color: var(--cream);
+  color: var(--forest-deep);
+  border-color: var(--cream);
+}
+
+/* Footer */
+.site-footer {
+  padding: 2rem 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--forest);
+  text-align: center;
+}
+
+.site-footer .wrap > div { margin-bottom: 0.4rem; }
+
+/* Modal */
+dialog.modal {
+  border: none;
+  padding: 0;
+  background: var(--cream);
+  max-width: 560px;
+  width: calc(100% - 2rem);
+  border-top: 4px solid var(--rust);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+
+dialog.modal::backdrop {
+  background-color: rgba(43, 53, 48, 0.7);
+}
+
+.modal-inner { padding: 2.5rem 2rem 2rem; }
+
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--forest);
+  line-height: 1;
+}
+
+.modal h2 { margin-bottom: 1rem; }
+.modal .modal-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 0.5rem;
+}
+
+.modal .pitch p { font-size: 1rem; }
+
+.modal-cta {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.fine-print {
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  color: var(--forest);
+  font-family: 'Inter', sans-serif;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  .hero { padding: 2.5rem 0 2rem; }
+  section { padding: 2rem 0; }
+  .nav { gap: 1rem; font-size: 0.9rem; }
+}
