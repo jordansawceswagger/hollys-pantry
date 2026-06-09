@@ -951,6 +951,13 @@ dialog.modal::backdrop { background-color: rgba(10, 10, 10, 0.62); }
 .map-pin .pin-body { fill: var(--ink); stroke: none; }
 .map-pin .pin-eye { fill: #ede4d3; stroke: none; }   /* matches map bg → reads as a ring */
 .map-pin--home { z-index: 4; }
+
+/* Preview pin positions in CSS (no inline styles → page runs under strict style-src) */
+.map-pin--home { left: 50%; top: 54%; }
+.map-pin--a { left: 30%; top: 36%; }
+.map-pin--b { left: 68%; top: 28%; }
+.map-pin--c { left: 22%; top: 72%; }
+.map-pin--d { left: 78%; top: 70%; }
 .map-pin-tag {
   position: absolute;
   left: calc(100% + 4px);
