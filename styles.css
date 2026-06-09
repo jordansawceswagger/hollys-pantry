@@ -565,3 +565,609 @@ dialog.modal::backdrop { background-color: rgba(10, 10, 10, 0.62); }
   .hero-feature { transition: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ============================================================
+   SINGLE-SCROLL HOMEPAGE — added for the merged Home + About
+   (sticky nav, rustic dividers, showcase, about, map preview,
+    home footer). New classes only; legacy pages untouched.
+   ============================================================ */
+
+/* ---------- Sticky "floating" header (index + map preview) ---------- */
+/* Base .site-header stays solid for legacy pages; the --float modifier
+   is transparent over the hero and turns solid after 100px of scroll. */
+.site-header--float {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: transparent;
+  border-bottom-color: transparent;
+  transition: background-color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+.site-header--float.scrolled {
+  background-color: var(--paper);
+  border-bottom-color: var(--hairline);
+  box-shadow: 0 6px 20px rgba(10, 10, 10, 0.06);
+}
+.site-header--float .nav { gap: 0.95rem; }
+
+.nav-sep {
+  color: var(--ink-faint);
+  font-size: 0.7rem;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Offset in-page anchors so the sticky header doesn't cover section tops */
+#top, #shop, #about, #find, #contact { scroll-margin-top: 84px; }
+
+/* Screen-reader-only (visually hidden but in the a11y tree) */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ---------- Section title treatment (flourish · CAPS · flourish) ---------- */
+.section-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  text-align: center;
+  margin: 0 auto 2.5rem;
+}
+.section-title h1,
+.section-title h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  color: var(--ink);
+  padding-left: 0.3em;        /* optical centering against trailing letter-spacing */
+}
+.section-title--left {
+  align-items: flex-start;
+  text-align: left;
+  margin: 0 0 1.5rem;
+}
+.section-title--left h1,
+.section-title--left h2 { padding-left: 0; }
+
+.section-flourish { width: 62px; height: auto; color: var(--ink-faint); display: block; }
+.section-flourish path,
+.section-flourish circle { fill: none; stroke: currentColor; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.section-flourish .fill { fill: currentColor; stroke: none; }
+.section-flourish.flip { transform: scaleY(-1); }
+
+/* ---------- Rustic dividers (4 distinct ornament motifs) ---------- */
+.rustic-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 60px 2rem;
+}
+.rd-line { flex: 1 1 auto; height: 1px; min-width: 28px; }
+.rd-line--l { background: linear-gradient(to right, transparent, rgba(10, 10, 10, 0.4)); }
+.rd-line--r { background: linear-gradient(to right, rgba(10, 10, 10, 0.4), transparent); }
+
+.rd-ornament { flex: 0 0 auto; color: rgba(10, 10, 10, 0.4); display: block; }
+.rd-ornament path,
+.rd-ornament circle { fill: none; stroke: currentColor; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.rd-ornament .fill { fill: currentColor; stroke: none; }
+
+/* Divider #3 — the one post-hero botanical accent */
+.rustic-divider--botanical .rd-botanical {
+  flex: 0 0 auto;
+  width: 180px;
+  max-width: 46vw;
+  height: auto;
+  opacity: 0.85;
+}
+
+/* ---------- Section 2 · Product showcase (horizontal snap-scroll) ---------- */
+.showcase-section { border-bottom: none; padding: 3rem 0; }
+
+.showcase {
+  position: relative;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.showcase-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.showcase-track::-webkit-scrollbar { display: none; }
+.showcase-track:focus-visible { outline: 1px solid var(--hairline); outline-offset: 4px; }
+
+.product-card {
+  flex: 0 0 calc((100% - 3rem) / 3);   /* 3 visible on desktop, 1.5rem gaps */
+  scroll-snap-align: start;
+  background-color: var(--paper);
+  border: 0.5px solid rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+.product-card .pc-photo {
+  aspect-ratio: 1 / 1;
+  background-color: var(--paper-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
+}
+.product-card .pc-body {
+  padding: 1.1rem 1.2rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+.product-card h3 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0;
+}
+.product-card .pc-tag {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.product-card .pc-link {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  margin-top: 0.1rem;
+}
+
+.showcase-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 10px rgba(10, 10, 10, 0.07);
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.showcase-arrow:hover { background-color: var(--ink); color: var(--paper); }
+.showcase-arrow--prev { left: -0.25rem; }
+.showcase-arrow--next { right: -0.25rem; }
+
+/* ---------- Section 3 · About Holly ---------- */
+.about { border-bottom: none; padding: 3rem 0; }
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 3rem 3.5rem;
+  align-items: start;
+}
+.about-left { display: flex; flex-direction: column; align-items: center; }
+.holly-photo {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 360 / 460;
+  background-color: var(--paper-deep);
+  border: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.78rem;
+  color: var(--ink-mute);
+}
+.holly-caption {
+  font-family: var(--sans);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-mute);
+  margin-top: 0.85rem;
+  text-align: center;
+}
+.about-headline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.45rem, 4.2vw, 1.75rem);   /* ~28px */
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 1.1rem;
+}
+.about-body {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: 1.85rem;
+}
+.moments { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.9rem; }
+.moment { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin: 0; }
+.m-box {
+  width: 120px;
+  height: 120px;
+  background-color: var(--paper-deep);
+  border: 1px solid var(--hairline-fine);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.68rem;
+  color: var(--ink-mute);
+}
+.m-cap { font-family: var(--hand); font-weight: 500; font-size: 1.05rem; color: var(--ink-soft); line-height: 1; }
+
+.coming-up {
+  border: 1px solid var(--hairline);
+  background-color: var(--paper-deep);
+  padding: 1.3rem 1.5rem;
+}
+.cu-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.9rem;
+  color: var(--ink);
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--hairline);
+}
+.cu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted var(--hairline);
+}
+.cu-row:last-child { border-bottom: none; }
+.cu-event { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--ink); }
+.cu-when { font-family: var(--sans); font-weight: 300; font-size: 0.78rem; letter-spacing: 0.03em; color: var(--ink-mute); text-align: right; white-space: nowrap; }
+
+/* ---------- Section 4 · Map preview ---------- */
+.mapprev { border-bottom: none; padding: 3rem 0; }
+.mapprev .section-title { margin-bottom: 0.8rem; }
+.mapprev-sub {
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
+}
+.mapprev-grid {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* Rustic framed map placeholder */
+.map-frame {
+  position: relative;
+  padding: 10px;
+  border: 1px solid var(--hairline);
+  max-width: 520px;
+  margin: 0 auto;
+}
+.map-frame::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--hairline-fine);
+  pointer-events: none;
+}
+.corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 0 solid var(--ink-soft);
+  z-index: 3;
+}
+.corner--tl { top: 1px; left: 1px; border-top-width: 1px; border-left-width: 1px; }
+.corner--tr { top: 1px; right: 1px; border-top-width: 1px; border-right-width: 1px; }
+.corner--bl { bottom: 1px; left: 1px; border-bottom-width: 1px; border-left-width: 1px; }
+.corner--br { bottom: 1px; right: 1px; border-bottom-width: 1px; border-right-width: 1px; }
+.map-canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 500 / 340;
+  background-color: #ede4d3;
+  overflow: hidden;
+}
+
+/* Hand-drawn pin (shared by preview + the Leaflet page) */
+.map-pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: block;
+  z-index: 2;
+}
+.map-pin svg { display: block; }
+.map-pin .pin-body { fill: var(--ink); stroke: none; }
+.map-pin .pin-eye { fill: #ede4d3; stroke: none; }   /* matches map bg → reads as a ring */
+.map-pin--home { z-index: 4; }
+.map-pin-tag {
+  position: absolute;
+  left: calc(100% + 4px);
+  top: 1px;
+  white-space: nowrap;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--ink);
+  background-color: rgba(237, 228, 211, 0.72);
+  padding: 0 0.25rem;
+}
+
+/* Stockist list (shared by preview + Leaflet sidebar) */
+.loc-list { list-style: none; }
+.loc { padding: 1.1rem 0; border-bottom: 1px solid var(--hairline-fine); }
+.loc:first-child { padding-top: 0; }
+.loc:last-child { border-bottom: none; }
+.loc h3 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+.loc .loc-addr { font-family: var(--sans); font-weight: 300; font-size: 11px; letter-spacing: 0.03em; color: var(--ink-mute); margin-bottom: 0.1rem; }
+.loc .loc-hours { font-family: var(--sans); font-style: italic; font-weight: 300; font-size: 10px; color: var(--ink-mute); margin-bottom: 0.35rem; }
+.loc .loc-products { font-family: var(--serif); font-style: italic; font-size: 0.85rem; color: var(--ink-soft); margin: 0; }
+
+.mapprev-cta { text-align: center; margin-top: 2.5rem; }
+.mapprev-cta a { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--ink); }
+
+/* ---------- Section 5 · Home footer (3 columns) ---------- */
+.home-footer {
+  background-color: var(--paper);
+  border-top: 1px solid var(--hairline);
+  padding: 3rem 0 2.2rem;
+}
+.footer-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.foot-mark {
+  font-family: var(--script);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--ink);
+  -webkit-text-stroke: 0.4px var(--ink);
+  paint-order: stroke fill;
+  margin-bottom: 0.5rem;
+}
+.foot-tag { font-family: var(--sans); font-weight: 300; font-size: 11px; letter-spacing: 0.14em; color: var(--ink-mute); }
+.foot-col { font-family: var(--sans); font-weight: 300; font-size: 11px; letter-spacing: 0.12em; line-height: 2; color: var(--ink-mute); }
+.foot-col a { color: var(--ink-soft); text-decoration: none; }
+.foot-col a:hover { text-decoration: underline; text-decoration-color: var(--hairline); }
+.foot-center { text-align: center; }
+.foot-right { text-align: right; }
+.foot-copy {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  text-align: center;
+  line-height: 1.6;
+  max-width: 48rem;
+  margin: 2.4rem auto 0;
+  padding-top: 1.3rem;
+  border-top: 1px solid var(--hairline-fine);
+}
+
+/* ============================================================
+   /map PAGE (Leaflet)
+   ============================================================ */
+.map-page { display: flex; flex-direction: column; }
+.map-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.2rem 2rem;
+  padding-top: 2.25rem;
+  padding-bottom: 1.4rem;
+}
+.map-toolbar .section-title { margin: 0; align-items: flex-start; text-align: left; }
+.map-toolbar .section-title h1,
+.map-toolbar .section-title h2 { padding-left: 0; }
+.map-toolbar .mapprev-sub { text-align: left; margin: 0.5rem 0 0; }
+
+.map-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+.map-filter label { white-space: nowrap; }
+.map-filter select {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background-color: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: 0;
+  padding: 0.42rem 1.9rem 0.42rem 0.7rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'><path d='M1 1l4 4 4-4' fill='none' stroke='%230a0a0a' stroke-width='1.4'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+}
+
+.map-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 360px);
+  border-top: 1px solid var(--hairline);
+}
+.leaflet-map {
+  height: calc(100vh - 210px);
+  min-height: 460px;
+  background-color: #ede4d3;
+}
+.map-sidebar {
+  height: calc(100vh - 210px);
+  min-height: 460px;
+  overflow-y: auto;
+  border-left: 1px solid var(--hairline);
+  background-color: var(--paper);
+  padding: 1.5rem 1.5rem 2rem;
+}
+.map-sidebar-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.82rem;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--hairline);
+}
+.loc.is-hidden { display: none; }
+.loc-empty { font-family: var(--serif); font-style: italic; color: var(--ink-mute); padding: 1rem 0; }
+
+/* Rustic Leaflet marker (divIcon) */
+.rustic-marker { background: none; border: none; }
+.rustic-marker svg { display: block; }
+.rustic-marker .pin-body { fill: var(--ink); stroke: none; }
+.rustic-marker .pin-eye { fill: var(--paper); stroke: none; }
+.rustic-marker--home .pin-body { fill: var(--ink); }
+
+/* Leaflet UI tuned to the rustic palette */
+.leaflet-tile-pane { filter: sepia(0.12) saturate(0.92) brightness(1.02); }
+.leaflet-container { font-family: var(--sans); background: #ede4d3; }
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip { background-color: var(--paper); color: var(--ink); border-radius: 0; box-shadow: 0 6px 20px rgba(10, 10, 10, 0.2); }
+.leaflet-popup-content { margin: 0.85rem 1.05rem; }
+.leaflet-popup-content .lp-name { font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 1rem; color: var(--ink); }
+.leaflet-popup-content .lp-products { font-family: var(--serif); font-style: italic; font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.2rem; }
+.leaflet-popup-content .lp-meta { font-family: var(--sans); font-weight: 300; font-size: 0.7rem; letter-spacing: 0.04em; color: var(--ink-mute); margin-top: 0.3rem; line-height: 1.5; }
+.leaflet-bar a, .leaflet-bar a:hover { border-radius: 0 !important; color: var(--ink); }
+.leaflet-control-attribution { font-size: 9px; background: rgba(250, 248, 243, 0.78); }
+
+/* Home-base label on the map */
+.leaflet-tooltip.home-tooltip {
+  background-color: rgba(237, 228, 211, 0.82);
+  border: none;
+  box-shadow: none;
+  padding: 0 0.3rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.leaflet-tooltip.home-tooltip::before { display: none; }   /* drop the callout arrow */
+
+.loc-badge {
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  border: 1px solid var(--hairline);
+  padding: 0.05rem 0.35rem;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   RESPONSIVE — single-scroll additions
+   ============================================================ */
+@media (max-width: 900px) {
+  .product-card { flex-basis: calc((100% - 1.5rem) / 2); }   /* 2-up on tablet */
+}
+
+@media (max-width: 820px) {
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .mapprev-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .map-layout { grid-template-columns: 1fr; }
+  .leaflet-map { height: 52vh; min-height: 340px; }
+  .map-sidebar { height: auto; min-height: 0; border-left: none; border-top: 1px solid var(--hairline); }
+}
+
+@media (max-width: 760px) {
+  .showcase-arrow { display: none; }   /* arrows are a desktop affordance */
+}
+
+@media (max-width: 720px) {
+  .footer-cols { grid-template-columns: 1fr; gap: 1.6rem; text-align: center; }
+  .foot-center, .foot-right { text-align: center; }
+}
+
+@media (max-width: 640px) {
+  .rustic-divider { padding: 30px 1.25rem; gap: 1rem; }
+  .rustic-divider--botanical .rd-botanical { width: 140px; }
+  .showcase-section, .about, .mapprev { padding: 2.5rem 0; }
+  .product-card { flex-basis: 82%; }   /* 1-up with a peek on mobile */
+  .map-toolbar { padding-top: 1.75rem; }
+}

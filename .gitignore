@@ -1,2 +1,4 @@
-# Local RuVector database — not part of the site
+# Local RuVector / AgentDB tooling state — not part of the site
 ruvector.db
+agentdb.rvf
+agentdb.rvf.lock

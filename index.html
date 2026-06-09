@@ -7,32 +7,40 @@
   <meta name="description" content="From Holly's Pantry to your kitchen — small-batch, non-toxic home and pantry goods, handmade in Bigfork, Montana. Find me at the market or reach out direct.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500;1,600&family=Caveat:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Caveat:wght@500;600&family=Inter:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <header class="site-header">
+  <!-- Sticky nav: transparent over the hero, solid + hairline after 100px scroll -->
+  <header class="site-header site-header--float">
     <div class="wrap">
-      <a href="index.html" class="brand">Holly's Pantry</a>
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="pantry.html">The Pantry</a>
-        <a href="about.html">About</a>
+      <a href="index.html#top" class="brand">Holly's Pantry</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html#top">Home</a>
+        <span class="nav-sep" aria-hidden="true">·</span>
+        <a href="index.html#shop">Shop</a>
+        <span class="nav-sep" aria-hidden="true">·</span>
+        <a href="map.html">Map</a>
+        <span class="nav-sep" aria-hidden="true">·</span>
+        <a href="index.html#contact">Contact</a>
       </nav>
     </div>
   </header>
 
   <main>
 
-    <!-- ============ HERO ============ -->
-    <section class="hero">
+    <!-- ============ SECTION 1 · HERO (kept as-is) ============ -->
+    <section class="hero" id="top">
       <div class="hero-inner">
+
+        <h1 class="visually-hidden">Holly's Pantry</h1>
 
         <div class="hero-from">From</div>
 
-        <!-- Arched "Holly's Pantry" logo — Petit Formal Script on a quadratic curve -->
-        <svg class="hero-arch" viewBox="0 0 620 168" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Holly's Pantry">
+        <!-- Arched "Holly's Pantry" logo — Petit Formal Script on a quadratic curve.
+             Decorative: the accessible page title is the visually-hidden h1 above. -->
+        <svg class="hero-arch" viewBox="0 0 620 168" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
           <defs>
             <path id="hero-arc" d="M 55,132 Q 310,20 565,132" fill="none"/>
           </defs>
@@ -63,104 +71,354 @@
       </div>
     </section>
 
-    <!-- ============ INTRO ============ -->
-    <section>
-      <div class="wrap measure">
-        <span class="eyebrow">Honest goods</span>
-        <h2>Honest goods for an honest home.</h2>
-        <p class="lede">Non-toxic pantry staples, home essentials, and small comforts &mdash; made in small batches and sold direct from my kitchen to yours.</p>
-      </div>
-    </section>
+    <!-- ============ RUSTIC DIVIDER #1 · flourish + diamond ============ -->
+    <div class="rustic-divider" aria-hidden="true">
+      <span class="rd-line rd-line--l"></span>
+      <svg class="rd-ornament" viewBox="0 0 120 18" width="120" height="18">
+        <path d="M4 8 C 26 8 30 3 42 8"/>
+        <path d="M8 11 C 26 11 30 7 40 11"/>
+        <path d="M116 8 C 94 8 90 3 78 8"/>
+        <path d="M112 11 C 94 11 90 7 80 11"/>
+        <path class="fill" d="M60 3.5 L 65 9 L 60 14.5 L 55 9 Z"/>
+      </svg>
+      <span class="rd-line rd-line--r"></span>
+    </div>
 
-    <div class="botanical-divider"><img src="assets/cover_herbs_transparent.png" alt=""></div>
-
-    <!-- ============ THIS WEEK ============ -->
-    <section>
-      <div class="wrap measure">
-        <span class="eyebrow">This Week</span>
-        <div class="this-week">
-          <h3>Where to find me</h3>
-          <p><strong>[MOM FILL IN]</strong> &mdash; e.g. &ldquo;Saturday, June 7 &middot; Bitterroot Valley Farmers Market &middot; 9am&ndash;1pm&rdquo;</p>
-          <p style="font-size: 0.95rem; color: var(--ink-mute);">Or order anytime by phone or email below.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ HOURS ============ -->
-    <section>
-      <div class="wrap measure">
-        <span class="eyebrow">When the pantry is open</span>
-        <h2>Hours</h2>
-        <div class="hours">
-          <div class="hours-row"><span class="day">Monday</span><span class="time">[MOM FILL IN]</span></div>
-          <div class="hours-row"><span class="day">Tuesday</span><span class="time">[MOM FILL IN]</span></div>
-          <div class="hours-row"><span class="day">Wednesday</span><span class="time">[MOM FILL IN]</span></div>
-          <div class="hours-row"><span class="day">Thursday</span><span class="time">[MOM FILL IN]</span></div>
-          <div class="hours-row"><span class="day">Friday</span><span class="time">[MOM FILL IN]</span></div>
-          <div class="hours-row"><span class="day">Saturday</span><span class="time">Markets &amp; events</span></div>
-          <div class="hours-row"><span class="day">Sunday</span><span class="time">Closed</span></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="botanical-divider tiny"><img src="assets/cover_herbs_transparent.png" alt=""></div>
-
-    <!-- ============ CONTACT ============ -->
-    <section>
-      <div class="wrap measure">
-        <span class="eyebrow">How to get in touch</span>
-        <h2>Reach out</h2>
-        <div class="contact-grid">
-          <div class="contact-card">
-            <span class="label">Call or Text</span>
-            <a href="tel:+14062121373">(406) 212&#8209;1373</a>
-          </div>
-          <div class="contact-card">
-            <span class="label">Email</span>
-            <a href="mailto:hollychannel80@gmail.com">hollychannel80@gmail.com</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CTA STRIP ============ -->
-    <section class="cta-strip">
+    <!-- ============ SECTION 2 · PRODUCT SHOWCASE ============ -->
+    <section id="shop" class="showcase-section">
       <div class="wrap">
-        <span class="eyebrow">For the curious</span>
-        <h2>The thing nobody tells you about your cleaning supplies.</h2>
-        <p>I quietly switched my whole house over a while back &mdash; better stuff, less money. Happy to tell you what I learned.</p>
-        <a href="#" class="btn" data-open-modal>Tell me more</a>
+        <div class="section-title">
+          <svg class="section-flourish" viewBox="0 0 70 8" aria-hidden="true">
+            <path d="M2 4 C 18 4 22 1.6 30 4"/>
+            <path d="M68 4 C 52 4 48 1.6 40 4"/>
+            <circle class="fill" cx="35" cy="4" r="1.5"/>
+          </svg>
+          <h2>From the Pantry</h2>
+          <svg class="section-flourish flip" viewBox="0 0 70 8" aria-hidden="true">
+            <path d="M2 4 C 18 4 22 1.6 30 4"/>
+            <path d="M68 4 C 52 4 48 1.6 40 4"/>
+            <circle class="fill" cx="35" cy="4" r="1.5"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="showcase">
+        <button class="showcase-arrow showcase-arrow--prev" type="button" aria-label="Previous products" data-scroll="prev">&lsaquo;</button>
+        <div class="showcase-track" data-showcase-track tabindex="0" aria-label="Product showcase, scrollable">
+
+          <article class="product-card">
+            <div class="pc-photo">Honey Granola</div>
+            <div class="pc-body">
+              <h3>Honey Granola</h3>
+              <p class="pc-tag">Slow-toasted oats, wildflower honey, and Montana-grown seeds in small batches.</p>
+              <a class="pc-link" href="pantry.html">View details</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="pc-photo">Herbal Tea Blend</div>
+            <div class="pc-body">
+              <h3>Herbal Tea Blend</h3>
+              <p class="pc-tag">Hand-mixed garden herbs and flowers, dried and blended for a quiet evening cup.</p>
+              <a class="pc-link" href="pantry.html">View details</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="pc-photo">Sourdough Crackers</div>
+            <div class="pc-body">
+              <h3>Sourdough Crackers</h3>
+              <p class="pc-tag">Thin, crisp, and tangy — baked from a starter kept alive on the kitchen counter.</p>
+              <a class="pc-link" href="pantry.html">View details</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="pc-photo">Apple Butter</div>
+            <div class="pc-body">
+              <h3>Apple Butter</h3>
+              <p class="pc-tag">Orchard apples simmered low and slow with cinnamon until deep, dark, and spoonable.</p>
+              <a class="pc-link" href="pantry.html">View details</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="pc-photo">Spice Rub</div>
+            <div class="pc-body">
+              <h3>Spice Rub</h3>
+              <p class="pc-tag">A warm all-purpose rub for the grill, the oven, or a slow Sunday roast.</p>
+              <a class="pc-link" href="pantry.html">View details</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="pc-photo">Pancake Mix</div>
+            <div class="pc-body">
+              <h3>Pancake Mix</h3>
+              <p class="pc-tag">Just add milk and an egg — a weekend-morning staple, milled and measured by hand.</p>
+              <a class="pc-link" href="pantry.html">View details</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="pc-photo">Cookie Mix</div>
+            <div class="pc-body">
+              <h3>Cookie Mix</h3>
+              <p class="pc-tag">Layered dry ingredients in a jar — the smell of fresh cookies, twenty minutes away.</p>
+              <a class="pc-link" href="pantry.html">View details</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="pc-photo">Wildflower Honey</div>
+            <div class="pc-body">
+              <h3>Wildflower Honey</h3>
+              <p class="pc-tag">Raw and unfiltered, gathered from Flathead Valley blooms and poured straight to the jar.</p>
+              <a class="pc-link" href="pantry.html">View details</a>
+            </div>
+          </article>
+
+        </div>
+        <button class="showcase-arrow showcase-arrow--next" type="button" aria-label="Next products" data-scroll="next">&rsaquo;</button>
       </div>
     </section>
+
+    <!-- ============ RUSTIC DIVIDER #2 · single sprig ============ -->
+    <div class="rustic-divider" aria-hidden="true">
+      <span class="rd-line rd-line--l"></span>
+      <svg class="rd-ornament rd-ornament--sprig" viewBox="0 0 48 48" width="34" height="34">
+        <path d="M24 46 L 24 13"/>
+        <path d="M24 36 C 16 35 11 29 12 22 C 20 23 24 30 24 36 Z"/>
+        <path d="M24 31 C 32 30 37 24 36 17 C 28 18 24 25 24 31 Z"/>
+        <path d="M24 25 C 18 24 14 19 15 13 C 21 14 24 20 24 25 Z"/>
+        <path d="M24 17 C 21 13 21 9 24 6 C 27 9 27 13 24 17 Z"/>
+      </svg>
+      <span class="rd-line rd-line--r"></span>
+    </div>
+
+    <!-- ============ SECTION 3 · ABOUT HOLLY ============ -->
+    <section id="about" class="about">
+      <div class="wrap">
+        <div class="about-grid">
+
+          <!-- LEFT column -->
+          <div class="about-left">
+            <div class="section-title section-title--left">
+              <svg class="section-flourish" viewBox="0 0 70 8" aria-hidden="true">
+                <path d="M2 4 C 18 4 22 1.6 30 4"/>
+                <path d="M68 4 C 52 4 48 1.6 40 4"/>
+                <circle class="fill" cx="35" cy="4" r="1.5"/>
+              </svg>
+              <h2>Meet Holly</h2>
+              <svg class="section-flourish flip" viewBox="0 0 70 8" aria-hidden="true">
+                <path d="M2 4 C 18 4 22 1.6 30 4"/>
+                <path d="M68 4 C 52 4 48 1.6 40 4"/>
+                <circle class="fill" cx="35" cy="4" r="1.5"/>
+              </svg>
+            </div>
+            <div class="holly-photo">Photo</div>
+            <p class="holly-caption">Holly Channel · Bigfork, Montana</p>
+          </div>
+
+          <!-- RIGHT column -->
+          <div class="about-right">
+            <p class="about-headline">[Placeholder — Holly's story will go here. A line or two in her own voice about why the pantry started.]</p>
+            <p class="about-body">[Placeholder body copy. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.]</p>
+
+            <div class="moments">
+              <figure class="moment">
+                <div class="m-box">Photo</div>
+                <figcaption class="m-cap">Sunday baking</figcaption>
+              </figure>
+              <figure class="moment">
+                <div class="m-box">Photo</div>
+                <figcaption class="m-cap">garden in June</figcaption>
+              </figure>
+              <figure class="moment">
+                <div class="m-box">Photo</div>
+                <figcaption class="m-cap">market morning</figcaption>
+              </figure>
+            </div>
+
+            <div class="coming-up">
+              <h3 class="cu-title">What's Coming Up</h3>
+              <div class="cu-row">
+                <span class="cu-event">Bigfork Farmers Market</span>
+                <span class="cu-when">Saturdays · 9am–1pm</span>
+              </div>
+              <div class="cu-row">
+                <span class="cu-event">Holiday Pop-Up</span>
+                <span class="cu-when">Dec 14</span>
+              </div>
+              <div class="cu-row">
+                <span class="cu-event">Spring Restock</span>
+                <span class="cu-when">Mar 1</span>
+              </div>
+              <div class="cu-row">
+                <span class="cu-event">Custom Orders</span>
+                <span class="cu-when">By appointment</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RUSTIC DIVIDER #3 · botanical (only post-hero appearance) ============ -->
+    <div class="rustic-divider rustic-divider--botanical" aria-hidden="true">
+      <span class="rd-line rd-line--l"></span>
+      <img class="rd-botanical" src="assets/cover_herbs_transparent.png" alt="">
+      <span class="rd-line rd-line--r"></span>
+    </div>
+
+    <!-- ============ SECTION 4 · MAP PREVIEW ============ -->
+    <section id="find" class="mapprev">
+      <div class="wrap">
+        <div class="section-title">
+          <svg class="section-flourish" viewBox="0 0 70 8" aria-hidden="true">
+            <path d="M2 4 C 18 4 22 1.6 30 4"/>
+            <path d="M68 4 C 52 4 48 1.6 40 4"/>
+            <circle class="fill" cx="35" cy="4" r="1.5"/>
+          </svg>
+          <h2>Find It Near You</h2>
+          <svg class="section-flourish flip" viewBox="0 0 70 8" aria-hidden="true">
+            <path d="M2 4 C 18 4 22 1.6 30 4"/>
+            <path d="M68 4 C 52 4 48 1.6 40 4"/>
+            <circle class="fill" cx="35" cy="4" r="1.5"/>
+          </svg>
+        </div>
+        <p class="mapprev-sub">Holly's Pantry products are stocked at these Bigfork spots.</p>
+
+        <div class="mapprev-grid">
+
+          <!-- LEFT · map placeholder with rustic frame + pins -->
+          <div class="mapprev-left">
+            <div class="map-frame">
+              <span class="corner corner--tl" aria-hidden="true"></span>
+              <span class="corner corner--tr" aria-hidden="true"></span>
+              <span class="corner corner--bl" aria-hidden="true"></span>
+              <span class="corner corner--br" aria-hidden="true"></span>
+              <div class="map-canvas" role="img" aria-label="Map of Bigfork, Montana showing where Holly's Pantry products are stocked">
+
+                <!-- Home base pin (larger, tagged) -->
+                <span class="map-pin map-pin--home" style="left:50%; top:54%;">
+                  <svg viewBox="0 0 18 24" width="22" height="29" aria-hidden="true">
+                    <path class="pin-body" d="M9 0 C 4 0 0 3.6 0 8.2 C 0 14 9 23 9 23 C 9 23 18 14 18 8.2 C 18 3.6 14 0 9 0 Z"/>
+                    <circle class="pin-eye" cx="9" cy="8.2" r="3"/>
+                  </svg>
+                  <span class="map-pin-tag">Holly's Pantry</span>
+                </span>
+
+                <!-- Stockist pins -->
+                <span class="map-pin" style="left:30%; top:36%;">
+                  <svg viewBox="0 0 18 24" width="16" height="21" aria-hidden="true">
+                    <path class="pin-body" d="M9 0 C 4 0 0 3.6 0 8.2 C 0 14 9 23 9 23 C 9 23 18 14 18 8.2 C 18 3.6 14 0 9 0 Z"/>
+                    <circle class="pin-eye" cx="9" cy="8.2" r="3"/>
+                  </svg>
+                </span>
+                <span class="map-pin" style="left:68%; top:28%;">
+                  <svg viewBox="0 0 18 24" width="16" height="21" aria-hidden="true">
+                    <path class="pin-body" d="M9 0 C 4 0 0 3.6 0 8.2 C 0 14 9 23 9 23 C 9 23 18 14 18 8.2 C 18 3.6 14 0 9 0 Z"/>
+                    <circle class="pin-eye" cx="9" cy="8.2" r="3"/>
+                  </svg>
+                </span>
+                <span class="map-pin" style="left:22%; top:72%;">
+                  <svg viewBox="0 0 18 24" width="16" height="21" aria-hidden="true">
+                    <path class="pin-body" d="M9 0 C 4 0 0 3.6 0 8.2 C 0 14 9 23 9 23 C 9 23 18 14 18 8.2 C 18 3.6 14 0 9 0 Z"/>
+                    <circle class="pin-eye" cx="9" cy="8.2" r="3"/>
+                  </svg>
+                </span>
+                <span class="map-pin" style="left:78%; top:70%;">
+                  <svg viewBox="0 0 18 24" width="16" height="21" aria-hidden="true">
+                    <path class="pin-body" d="M9 0 C 4 0 0 3.6 0 8.2 C 0 14 9 23 9 23 C 9 23 18 14 18 8.2 C 18 3.6 14 0 9 0 Z"/>
+                    <circle class="pin-eye" cx="9" cy="8.2" r="3"/>
+                  </svg>
+                </span>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT · stockist list -->
+          <div class="mapprev-right">
+            <ul class="loc-list">
+              <li class="loc">
+                <h3>Bigfork General Store</h3>
+                <p class="loc-addr">123 Electric Ave, Bigfork, MT</p>
+                <p class="loc-hours">Mon–Sat 8am–6pm</p>
+                <p class="loc-products">Honey Granola · Spice Rub · Herbal Tea</p>
+              </li>
+              <li class="loc">
+                <h3>Flathead Valley Farmstand</h3>
+                <p class="loc-addr">8800 MT Highway 35, Bigfork, MT</p>
+                <p class="loc-hours">Daily 9am–5pm</p>
+                <p class="loc-products">Apple Butter · Wildflower Honey · Pancake Mix</p>
+              </li>
+              <li class="loc">
+                <h3>Swan River Mercantile</h3>
+                <p class="loc-addr">450 Grand Ave, Bigfork, MT</p>
+                <p class="loc-hours">Tue–Sun 10am–5pm</p>
+                <p class="loc-products">Sourdough Crackers · Cookie Mix · Spice Rub</p>
+              </li>
+              <li class="loc">
+                <h3>Lakeside Coffee &amp; Goods</h3>
+                <p class="loc-addr">27 Holt Dr, Bigfork, MT</p>
+                <p class="loc-hours">Daily 7am–4pm</p>
+                <p class="loc-products">Honey Granola · Wildflower Honey · Herbal Tea</p>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <p class="mapprev-cta"><a href="map.html">View Full Map &rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- ============ RUSTIC DIVIDER #4 · lozenge fleuron ============ -->
+    <div class="rustic-divider" aria-hidden="true">
+      <span class="rd-line rd-line--l"></span>
+      <svg class="rd-ornament" viewBox="0 0 110 16" width="110" height="16">
+        <path d="M4 8 C 22 8 24 3 34 8 C 38 10 41 9 43 8"/>
+        <path d="M106 8 C 88 8 86 3 76 8 C 72 10 69 9 67 8"/>
+        <path class="fill" d="M55 1 L 60 8 L 55 15 L 50 8 Z"/>
+        <circle class="fill" cx="45" cy="8" r="1.4"/>
+        <circle class="fill" cx="65" cy="8" r="1.4"/>
+      </svg>
+      <span class="rd-line rd-line--r"></span>
+    </div>
 
   </main>
 
-  <footer class="site-footer">
+  <!-- ============ SECTION 5 · FOOTER ============ -->
+  <footer class="home-footer" id="contact">
     <div class="wrap">
-      <div class="footer-mark">Holly's Pantry</div>
-      <div>Bigfork, Montana</div>
-      <div><a href="tel:+14062121373">(406) 212&#8209;1373</a> &middot; <a href="mailto:hollychannel80@gmail.com">hollychannel80@gmail.com</a></div>
+      <div class="footer-cols">
+
+        <div class="foot-col foot-left">
+          <div class="foot-mark">Holly's Pantry</div>
+          <p class="foot-tag">From our home to yours</p>
+        </div>
+
+        <div class="foot-col foot-center">
+          <a href="tel:+14062121373">(406) 212&#8209;1373</a><br>
+          <a href="mailto:hollychannel80@gmail.com">hollychannel80@gmail.com</a><br>
+          Bigfork, Montana
+        </div>
+
+        <nav class="foot-col foot-right" aria-label="Footer">
+          <a href="index.html#top">Home</a><br>
+          <a href="index.html#shop">Shop</a><br>
+          <a href="map.html">Map</a><br>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+
+      </div>
+
+      <p class="foot-copy">© 2026 Holly's Pantry · Made in a home kitchen that is not subject to retail food establishment regulations or inspections.</p>
     </div>
   </footer>
-
-  <!-- Shared modal — keep in sync across pages -->
-  <dialog id="melaleuca-modal" class="modal" aria-labelledby="modal-title">
-    <div class="modal-inner">
-      <button class="modal-close" data-close-modal aria-label="Close">&times;</button>
-      <span class="modal-eyebrow">A note from Holly</span>
-      <h2 id="modal-title">Same products. Better quality. Less money.</h2>
-      <div class="pitch">
-        <p>A few years ago I got tired of paying retail for cleaners, soaps, and home essentials made with stuff I couldn't pronounce. So I switched.</p>
-        <p>I shop through <strong>Melaleuca</strong> &mdash; it's not a store and it's not a subscription box. It's a member-direct manufacturer of non-toxic home and wellness goods. You buy what you'd buy anyway, but at member pricing, and the products are <em>actually</em> clean.</p>
-        <p>If you'd like me to walk you through it &mdash; no pressure, no script &mdash; just say the word.</p>
-      </div>
-      <div class="modal-cta">
-        <a href="tel:+14062121373" class="btn">Call (406) 212&#8209;1373</a>
-        <a href="mailto:hollychannel80@gmail.com?subject=Tell%20me%20about%20Melaleuca" class="btn btn-ghost">Email me</a>
-      </div>
-      <p class="fine-print">[MOM FILL IN: any required Melaleuca disclosure language, your enrollment ID, and the official membership benefits summary go here.]</p>
-    </div>
-  </dialog>
 
   <script src="app.js"></script>
 </body>
