@@ -3,12 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://unpkg.com; base-uri 'self'; form-action 'self'; object-src 'none'">
   <title>Holly's Pantry — Small-batch, non-toxic homegoods & pantry staples</title>
   <meta name="description" content="From Holly's Pantry to your kitchen — small-batch, non-toxic home and pantry goods, handmade in Bigfork, Montana. Find me at the market or reach out direct.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Caveat:wght@500;600&family=Inter:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <!-- Leaflet (stable 1.9.4) for the homepage map preview -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
@@ -270,44 +273,7 @@
               <span class="corner corner--tr" aria-hidden="true"></span>
               <span class="corner corner--bl" aria-hidden="true"></span>
               <span class="corner corner--br" aria-hidden="true"></span>
-              <div class="map-canvas" role="img" aria-label="Map of Bigfork, Montana showing where Holly's Pantry products are stocked">
-
-                <!-- Home base pin (larger, tagged) -->
-                <span class="map-pin map-pin--home">
-                  <svg viewBox="0 0 18 24" width="22" height="29" aria-hidden="true">
-                    <path class="pin-body" d="M9 0 C 4 0 0 3.6 0 8.2 C 0 14 9 23 9 23 C 9 23 18 14 18 8.2 C 18 3.6 14 0 9 0 Z"/>
-                    <circle class="pin-eye" cx="9" cy="8.2" r="3"/>
-                  </svg>
-                  <span class="map-pin-tag">Holly's Pantry</span>
-                </span>
-
-                <!-- Stockist pins -->
-                <span class="map-pin map-pin--a">
-                  <svg viewBox="0 0 18 24" width="16" height="21" aria-hidden="true">
-                    <path class="pin-body" d="M9 0 C 4 0 0 3.6 0 8.2 C 0 14 9 23 9 23 C 9 23 18 14 18 8.2 C 18 3.6 14 0 9 0 Z"/>
-                    <circle class="pin-eye" cx="9" cy="8.2" r="3"/>
-                  </svg>
-                </span>
-                <span class="map-pin map-pin--b">
-                  <svg viewBox="0 0 18 24" width="16" height="21" aria-hidden="true">
-                    <path class="pin-body" d="M9 0 C 4 0 0 3.6 0 8.2 C 0 14 9 23 9 23 C 9 23 18 14 18 8.2 C 18 3.6 14 0 9 0 Z"/>
-                    <circle class="pin-eye" cx="9" cy="8.2" r="3"/>
-                  </svg>
-                </span>
-                <span class="map-pin map-pin--c">
-                  <svg viewBox="0 0 18 24" width="16" height="21" aria-hidden="true">
-                    <path class="pin-body" d="M9 0 C 4 0 0 3.6 0 8.2 C 0 14 9 23 9 23 C 9 23 18 14 18 8.2 C 18 3.6 14 0 9 0 Z"/>
-                    <circle class="pin-eye" cx="9" cy="8.2" r="3"/>
-                  </svg>
-                </span>
-                <span class="map-pin map-pin--d">
-                  <svg viewBox="0 0 18 24" width="16" height="21" aria-hidden="true">
-                    <path class="pin-body" d="M9 0 C 4 0 0 3.6 0 8.2 C 0 14 9 23 9 23 C 9 23 18 14 18 8.2 C 18 3.6 14 0 9 0 Z"/>
-                    <circle class="pin-eye" cx="9" cy="8.2" r="3"/>
-                  </svg>
-                </span>
-
-              </div>
+              <div id="home-map" class="map-canvas" role="img" aria-label="Interactive map of Bigfork, Montana showing where Holly's Pantry products are stocked. The same locations are listed beside the map."></div>
             </div>
           </div>
 
@@ -390,6 +356,12 @@
       <p class="foot-copy">© 2026 Holly's Pantry · Made in a home kitchen that is not subject to retail food establishment regulations or inspections.</p>
     </div>
   </footer>
+
+  <!-- Leaflet + shared data + homepage teaser map -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="locations.js?v=1"></script>
+  <script src="home-map.js?v=1"></script>
 
   <script src="app.js?v=2"></script>
 </body>
