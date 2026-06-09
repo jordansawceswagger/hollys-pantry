@@ -45,6 +45,7 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;        /* no whole-page horizontal scroll; the carousel scrolls internally */
 }
 
 /* ---------- Typography ---------- */
@@ -614,62 +615,69 @@ dialog.modal::backdrop { background-color: rgba(10, 10, 10, 0.62); }
   white-space: nowrap;
 }
 
-/* ---------- Section title treatment (flourish · CAPS · flourish) ---------- */
+/* ---------- Section title treatment (short fading hairline · CAPS · hairline) ---------- */
 .section-title {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.65rem;
-  text-align: center;
+  justify-content: center;
+  gap: 16px;
   margin: 0 auto 2.5rem;
 }
+.section-title::before,
+.section-title::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  max-width: 120px;          /* short flanking hairlines, not full-width rules */
+}
+.section-title::before { background: linear-gradient(to right, transparent, var(--hairline)); }
+.section-title::after  { background: linear-gradient(to left, transparent, var(--hairline)); }
 .section-title h1,
 .section-title h2 {
   font-family: var(--serif);
   font-style: italic;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  letter-spacing: 4px;
+  font-size: 15px;           /* small, refined — not a hero headline */
+  line-height: 1.2;
   color: var(--ink);
-  padding-left: 0.3em;        /* optical centering against trailing letter-spacing */
+  white-space: nowrap;
+  margin: 0;
+  padding-left: 4px;         /* optical balance against trailing letter-spacing */
 }
 .section-title--left {
-  align-items: flex-start;
-  text-align: left;
+  justify-content: flex-start;
+  gap: 14px;
   margin: 0 0 1.5rem;
 }
-.section-title--left h1,
-.section-title--left h2 { padding-left: 0; }
-
-.section-flourish { width: 62px; height: auto; color: var(--ink-faint); display: block; }
-.section-flourish path,
-.section-flourish circle { fill: none; stroke: currentColor; stroke-width: 1; vector-effect: non-scaling-stroke; }
-.section-flourish .fill { fill: currentColor; stroke: none; }
-.section-flourish.flip { transform: scaleY(-1); }
+.section-title--left::before { display: none; }   /* left-aligned: trailing hairline only */
+.section-title--left::after { max-width: 80px; }
 
 /* ---------- Rustic dividers (4 distinct ornament motifs) ---------- */
 .rustic-divider {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  padding: 60px 2rem;
+  gap: 1.25rem;
+  padding: 22px 2rem;        /* refined accent — compact, never a slab */
+  max-height: 80px;
+  overflow: hidden;          /* safety net: clip any SVG/image bleed */
 }
 .rd-line { flex: 1 1 auto; height: 1px; min-width: 28px; }
 .rd-line--l { background: linear-gradient(to right, transparent, rgba(10, 10, 10, 0.4)); }
 .rd-line--r { background: linear-gradient(to right, rgba(10, 10, 10, 0.4), transparent); }
 
-.rd-ornament { flex: 0 0 auto; color: rgba(10, 10, 10, 0.4); display: block; }
+.rd-ornament { flex: 0 0 auto; max-width: 240px; height: auto; color: rgba(10, 10, 10, 0.4); display: block; }
 .rd-ornament path,
 .rd-ornament circle { fill: none; stroke: currentColor; stroke-width: 1; vector-effect: non-scaling-stroke; }
 .rd-ornament .fill { fill: currentColor; stroke: none; }
 
-/* Divider #3 — the one post-hero botanical accent */
+/* Divider #3 — the one post-hero botanical accent (sized by height to stay small) */
 .rustic-divider--botanical .rd-botanical {
   flex: 0 0 auto;
-  width: 180px;
+  height: 34px;
+  width: auto;
   max-width: 46vw;
-  height: auto;
   opacity: 0.85;
 }
 
@@ -680,15 +688,15 @@ dialog.modal::backdrop { background-color: rgba(10, 10, 10, 0.62); }
   position: relative;
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0;
 }
 .showcase-track {
   display: flex;
-  gap: 1.5rem;
+  gap: 24px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding-bottom: 1rem;
+  padding: 0 40px 1rem;      /* gutters leave room for the edge arrows */
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
@@ -696,7 +704,7 @@ dialog.modal::backdrop { background-color: rgba(10, 10, 10, 0.62); }
 .showcase-track:focus-visible { outline: 1px solid var(--hairline); outline-offset: 4px; }
 
 .product-card {
-  flex: 0 0 calc((100% - 3rem) / 3);   /* 3 visible on desktop, 1.5rem gaps */
+  flex: 0 0 280px;                     /* fixed 280px cards; ~3 visible on desktop */
   scroll-snap-align: start;
   background-color: var(--paper);
   border: 0.5px solid rgba(0, 0, 0, 0.15);
@@ -704,8 +712,8 @@ dialog.modal::backdrop { background-color: rgba(10, 10, 10, 0.62); }
   flex-direction: column;
 }
 .product-card .pc-photo {
-  aspect-ratio: 1 / 1;
-  background-color: var(--paper-deep);
+  aspect-ratio: 1 / 1;                 /* 280px-wide card → 280x280 image box */
+  background-color: #ede4d3;           /* warm parchment image placeholder */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -757,26 +765,27 @@ dialog.modal::backdrop { background-color: rgba(10, 10, 10, 0.62); }
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 1px solid var(--hairline);
   background-color: var(--paper);
   color: var(--ink);
   font-family: var(--serif);
-  font-size: 1.6rem;
+  font-size: 20px;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 2px;        /* optical centering of the chevron glyph */
   cursor: pointer;
-  z-index: 2;
-  box-shadow: 0 2px 10px rgba(10, 10, 10, 0.07);
+  z-index: 3;
+  box-shadow: 0 2px 10px rgba(10, 10, 10, 0.08);
   transition: background-color 0.18s ease, color 0.18s ease;
 }
 .showcase-arrow:hover { background-color: var(--ink); color: var(--paper); }
-.showcase-arrow--prev { left: -0.25rem; }
-.showcase-arrow--next { right: -0.25rem; }
+.showcase-arrow--prev { left: 4px; }
+.showcase-arrow--next { right: 4px; }
 
 /* ---------- Section 3 · About Holly ---------- */
 .about { border-bottom: none; padding: 3rem 0; }
@@ -1143,10 +1152,6 @@ dialog.modal::backdrop { background-color: rgba(10, 10, 10, 0.62); }
 /* ============================================================
    RESPONSIVE — single-scroll additions
    ============================================================ */
-@media (max-width: 900px) {
-  .product-card { flex-basis: calc((100% - 1.5rem) / 2); }   /* 2-up on tablet */
-}
-
 @media (max-width: 820px) {
   .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .mapprev-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -1165,9 +1170,9 @@ dialog.modal::backdrop { background-color: rgba(10, 10, 10, 0.62); }
 }
 
 @media (max-width: 640px) {
-  .rustic-divider { padding: 30px 1.25rem; gap: 1rem; }
-  .rustic-divider--botanical .rd-botanical { width: 140px; }
+  .rustic-divider { padding: 18px 1.25rem; gap: 1rem; }
+  .rustic-divider--botanical .rd-botanical { height: 28px; width: auto; }
+  .showcase-track { padding: 0 20px 1rem; }
   .showcase-section, .about, .mapprev { padding: 2.5rem 0; }
-  .product-card { flex-basis: 82%; }   /* 1-up with a peek on mobile */
   .map-toolbar { padding-top: 1.75rem; }
 }
