@@ -6,10 +6,11 @@
      Drop in current products or a seasonal note — Holly's call. */
   const CALLOUTS = [
     'Small-batch & made by hand',
-    'Wild huckleberry preserves',
-    'Slow-simmered apple butter',
-    'Hand-milled herb & flower salts',
-    'Sourdough, started Sunday',
+    'Maple nut granola, baked this week',
+    "Grammi's pancakes, layered in the jar",
+    'Bouillon without the mystery cubes',
+    'Taco seasoning you can pronounce',
+    'Fresh flour, milled to order',
     'Non-toxic, kitchen to home',
   ];
 

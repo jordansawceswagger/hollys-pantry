@@ -1,9 +1,14 @@
 {
   "events": [
     {
-      "title": "[Event name — e.g. Bigfork Farmers Market]",
-      "when": "[Plain words — e.g. Saturdays through September, 9–1]",
-      "note": "[Optional — what Holly's bringing, where her table is.]"
+      "title": "Home Pantry Event",
+      "when": "July 11–12",
+      "note": "165 Monroe St, Bigfork, MT — come by and see the pantry in person."
+    },
+    {
+      "title": "More dates",
+      "when": "To be announced",
+      "note": ""
     }
   ]
 }
