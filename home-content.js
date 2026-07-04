@@ -53,8 +53,11 @@
         return (a.home === b.home) ? 0 : (a.home ? 1 : -1); // stores first, home base last
       });
       ul.innerHTML = ordered.map(function (loc) {
+        var name = loc.website
+          ? '<a href="' + esc(loc.website) + '" target="_blank" rel="noopener">' + esc(loc.name) + '</a>'
+          : esc(loc.name);
         return '<li class="loc">' +
-          '<h3>' + esc(loc.name) + '</h3>' +
+          '<h3>' + name + '</h3>' +
           '<p class="loc-addr">' + esc(loc.address) + '</p>' +
           '<p class="loc-hours">' + esc(loc.hours) + '</p>' +
           '<p class="loc-products">' + esc(H.productsLabel(loc)) + '</p>' +

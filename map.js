@@ -18,8 +18,11 @@
     // --- Build markers (popup products link to their pantry.html card) ---
     LOCATIONS.forEach(function (loc) {
       var m = L.marker([loc.lat, loc.lng], { icon: H.makeIcon(loc.home), alt: loc.name, title: loc.name });
+      var nameHtml = loc.website
+        ? '<a href="' + loc.website + '" target="_blank" rel="noopener">' + loc.name + '</a>'
+        : loc.name;
       m.bindPopup(
-        '<div class="lp-name">' + loc.name + '</div>' +
+        '<div class="lp-name">' + nameHtml + '</div>' +
         '<div class="lp-products">' + H.productLinks(loc) + '</div>' +
         '<div class="lp-meta">' + loc.address + '<br>' + loc.hours + '</div>'
       );

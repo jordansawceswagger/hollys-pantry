@@ -221,8 +221,10 @@
             var p = document.createElement('p');
             p.className = 'find-at';
             p.innerHTML = 'Find it at: ' + carriers.map(function (s) {
-              return '<a href="map.html">' + s.name + '</a>';
-            }).join(' · ');
+              return s.website
+                ? '<a href="' + s.website + '" target="_blank" rel="noopener">' + s.name + '</a>'
+                : '<a href="map.html">' + s.name + '</a>';
+            }).join(' · ') + ' &middot; <a href="map.html">map</a>';
             card.querySelector('.info').appendChild(p);
           });
         })
