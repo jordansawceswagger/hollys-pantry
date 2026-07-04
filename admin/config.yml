@@ -1,0 +1,84 @@
+# Decap CMS config — Holly's Pantry
+# Docs: https://decapcms.org/docs/configuration-options/
+
+backend:
+  name: github
+  repo: jordansawceswagger/hollys-pantry
+  branch: main
+  # OAuth handshake runs through the Cloudflare Worker (see admin/SETUP.md).
+  # Replace with your deployed worker URL:
+  base_url: https://REPLACE-ME.workers.dev
+  commit_messages:
+    update: "Holly edit: {{path}}"
+    uploadMedia: "Holly upload: {{path}}"
+
+# Where uploaded images (e.g. headshot, event photos) land in the repo
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
+
+site_url: https://hollyspantry.org
+logo_url: https://hollyspantry.org/assets/cover_herbs_transparent.png
+
+collections:
+  - name: pages
+    label: "Site Content"
+    files:
+      - name: meet
+        label: "Meet Us page"
+        file: "content/meet.json"
+        fields:
+          - label: "Intro line"
+            name: intro
+            widget: string
+            hint: "The short line under the page title."
+          - label: "Holly's story"
+            name: story
+            widget: text
+            hint: "Write naturally. Leave a blank line between paragraphs."
+          - label: "Headshot"
+            name: headshot
+            widget: image
+            required: false
+            hint: "A photo of you. Landscape or portrait both work."
+
+      - name: coming_up
+        label: "Coming Up (markets & events)"
+        file: "content/coming-up.json"
+        fields:
+          - label: "Events"
+            name: events
+            widget: list
+            summary: "{{fields.title}} — {{fields.when}}"
+            fields:
+              - { label: "Title", name: title, widget: string, hint: "e.g. Bigfork Farmers Market" }
+              - { label: "When", name: when, widget: string, hint: "Plain words: 'Saturdays through September, 9–1'" }
+              - { label: "Note", name: note, widget: text, required: false, hint: "Anything extra — what you're bringing, where to find your table." }
+
+      - name: stockists
+        label: "Map — stores & products"
+        file: "stockists.json"
+        fields:
+          - label: "Products (master list)"
+            name: products
+            widget: list
+            summary: "{{fields.name}}"
+            hint: "The slug must match the product's card on The Pantry page. Ask Jordan before changing slugs."
+            fields:
+              - { label: "Slug", name: slug, widget: string }
+              - { label: "Name", name: name, widget: string }
+          - label: "Stores"
+            name: stockists
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Slug", name: slug, widget: string, hint: "Short id, lowercase with hyphens: birch-provisions" }
+              - { label: "Name", name: name, widget: string }
+              - { label: "Home base?", name: home, widget: boolean, required: false, default: false }
+              - { label: "Address", name: address, widget: string }
+              - { label: "Hours", name: hours, widget: string }
+              - { label: "Latitude", name: lat, widget: number, value_type: float, hint: "Right-click the spot in Google Maps to copy coordinates." }
+              - { label: "Longitude", name: lng, widget: number, value_type: float }
+              - label: "Carries (product slugs)"
+                name: carries
+                widget: list
+                field: { label: "Product slug", name: slug, widget: string }

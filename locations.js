@@ -1,45 +1,22 @@
 // Shared stockist data + rustic pin helpers — single source of truth for the
 // homepage map preview (home-map.js) and the full /map page (map.js).
-// Loaded after Leaflet; exposes window.HOLLYS.
+// Data lives in stockists.json (editable via /admin/); this file loads and
+// normalizes it, exposing window.HOLLYS with a `ready` promise.
 (function () {
   var BIGFORK = [48.0633, -114.0667];
 
-  // Placeholder stocking locations. Coordinates are around Bigfork, MT.
-  var LOCATIONS = [
-    {
-      name: "Holly's Pantry", home: true,
-      address: 'Bigfork, Montana', hours: 'By appointment',
-      lat: 48.0633, lng: -114.0667,
-      products: ['Honey Granola','Herbal Tea Blend','Sourdough Crackers','Apple Butter','Spice Rub','Pancake Mix','Cookie Mix','Wildflower Honey']
-    },
-    {
-      name: 'Bigfork General Store',
-      address: '123 Electric Ave, Bigfork, MT', hours: 'Mon–Sat 8am–6pm',
-      lat: 48.0641, lng: -114.0710,
-      products: ['Honey Granola','Spice Rub','Herbal Tea Blend']
-    },
-    {
-      name: 'Flathead Valley Farmstand',
-      address: '8800 MT Highway 35, Bigfork, MT', hours: 'Daily 9am–5pm',
-      lat: 48.0712, lng: -114.0588,
-      products: ['Apple Butter','Wildflower Honey','Pancake Mix']
-    },
-    {
-      name: 'Swan River Mercantile',
-      address: '450 Grand Ave, Bigfork, MT', hours: 'Tue–Sun 10am–5pm',
-      lat: 48.0567, lng: -114.0729,
-      products: ['Sourdough Crackers','Cookie Mix','Spice Rub']
-    },
-    {
-      name: 'Lakeside Coffee & Goods',
-      address: '27 Holt Dr, Bigfork, MT', hours: 'Daily 7am–4pm',
-      lat: 48.0498, lng: -114.0631,
-      products: ['Honey Granola','Wildflower Honey','Herbal Tea Blend']
-    }
-  ];
-
+  // Plain-text product names, for the sidebar and the home teaser.
   function productsLabel(loc) {
-    return loc.home ? 'The full Holly’s Pantry line' : loc.products.join(' · ');
+    if (loc.home) return 'The full Holly’s Pantry line';
+    return loc.products.map(function (p) { return p.name; }).join(' · ');
+  }
+
+  // Linked product names, for the /map popups → pantry.html#slug anchors.
+  function productLinks(loc) {
+    if (loc.home) return productsLabel(loc);
+    return loc.products.map(function (p) {
+      return '<a href="pantry.html#' + p.slug + '">' + p.name + '</a>';
+    }).join(' · ');
   }
 
   // Hand-drawn rustic pin (circle + tapered point), matching the brand.
@@ -62,11 +39,28 @@
     });
   }
 
-  window.HOLLYS = {
+  var H = window.HOLLYS = {
     BIGFORK: BIGFORK,
-    LOCATIONS: LOCATIONS,
+    LOCATIONS: [],   // populated once `ready` resolves
+    PRODUCTS: [],
     productsLabel: productsLabel,
+    productLinks: productLinks,
     pinSvg: pinSvg,
     makeIcon: makeIcon
   };
+
+  H.ready = fetch('stockists.json')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var bySlug = {};
+      (data.products || []).forEach(function (p) { bySlug[p.slug] = p; });
+      H.PRODUCTS = data.products || [];
+      H.LOCATIONS = (data.stockists || []).map(function (s) {
+        s.products = (s.carries || []).map(function (slug) {
+          return bySlug[slug] || { slug: slug, name: slug };
+        });
+        return s;
+      });
+      return H;
+    });
 })();

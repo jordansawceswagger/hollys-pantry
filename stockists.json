@@ -1,0 +1,56 @@
+{
+  "products": [
+    { "slug": "maple-nut-granola", "name": "Maple Nut Granola" },
+    { "slug": "grammis-pancakes", "name": "Grammi's Pancakes" },
+    { "slug": "bouillon-powder", "name": "Bouillon Powder" },
+    { "slug": "non-beef-bouillon", "name": "Non Beef Bouillon" },
+    { "slug": "taco-seasoning", "name": "Taco Seasoning" },
+    { "slug": "brown-gravy", "name": "Brown Gravy" },
+    { "slug": "ranch-mix", "name": "Ranch Mix" },
+    { "slug": "veggie-dip", "name": "Veggie Dip" },
+    { "slug": "dark-brown-sugar", "name": "Dark Brown Sugar" },
+    { "slug": "fresh-ground-flour", "name": "Fresh Ground Flour" }
+  ],
+  "stockists": [
+    {
+      "slug": "hollys-pantry",
+      "name": "Holly's Pantry",
+      "home": true,
+      "address": "Bigfork, Montana",
+      "hours": "By appointment",
+      "lat": 48.0633,
+      "lng": -114.0667,
+      "carries": [
+        "maple-nut-granola",
+        "grammis-pancakes",
+        "bouillon-powder",
+        "non-beef-bouillon",
+        "taco-seasoning",
+        "brown-gravy",
+        "ranch-mix",
+        "veggie-dip",
+        "dark-brown-sugar",
+        "fresh-ground-flour"
+      ]
+    },
+    {
+      "slug": "birch-provisions",
+      "name": "Birch Provisions",
+      "address": "475 Electric Ave, Suite 3 (upstairs), Bigfork, MT 59911",
+      "hours": "Open daily, 8am–4pm",
+      "lat": 48.0636,
+      "lng": -114.0723,
+      "carries": [
+        "maple-nut-granola",
+        "grammis-pancakes",
+        "bouillon-powder",
+        "non-beef-bouillon",
+        "taco-seasoning",
+        "brown-gravy",
+        "ranch-mix",
+        "veggie-dip",
+        "dark-brown-sugar"
+      ]
+    }
+  ]
+}

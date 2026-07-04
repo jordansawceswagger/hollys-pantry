@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About my Pantry — Holly's Pantry</title>
-  <meta name="description" content="The story behind Holly's Pantry — small-batch, non-toxic, and made by hand.">
+  <title>Meet Us — Holly's Pantry</title>
+  <meta name="description" content="Meet Holly — the hands behind the jars — and see where the pantry will be next.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500;1,600&family=Caveat:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -33,52 +33,41 @@
 
     <section class="page-head">
       <div class="wrap">
-        <span class="eyebrow">About my Pantry</span>
-        <h1>A small shop with a clear standard.</h1>
-        <p class="lede">If I wouldn't put it in my own home, I won't sell it from mine.</p>
+        <span class="eyebrow">Meet Us</span>
+        <h1>Meet Holly</h1>
+        <p class="lede" data-meet-intro>The hands behind the jars.</p>
       </div>
     </section>
 
     <section>
       <div class="wrap" style="max-width: 38rem;">
-
+        <figure data-meet-headshot hidden style="margin: 0 0 2rem;">
+          <img alt="Holly" style="width: 100%; display: block; border: 1px solid var(--hairline);">
+        </figure>
         <span class="eyebrow">The Story</span>
-        <h2>How this started</h2>
-        <p>[MOM FILL IN: a few short paragraphs in your own voice. What made you start the pantry? What did you stop tolerating in store-bought stuff? What does "non-toxic" mean to you, in plain words?]</p>
-
-        <p>[MOM FILL IN: a second paragraph &mdash; what you actually do day-to-day. Where you source. How you make things. What you won't compromise on.]</p>
-
-        <div class="this-week" style="margin: 2.5rem 0;">
-          <h3>What I won't carry</h3>
-          <p style="margin: 0;">[MOM FILL IN: a short, honest list &mdash; e.g. synthetic fragrance, common preservatives, ingredients you've researched and walked away from. Specifics build trust.]</p>
+        <h2>In her own words</h2>
+        <div data-meet-story>
+          <p>Story loading &mdash; if this line sticks around, <a href="mailto:hollychannel80@gmail.com">send me a note</a> and I'll tell it to you directly.</p>
         </div>
+      </div>
+    </section>
 
-        <span class="eyebrow">The Approach</span>
-        <h2>Small, slow, and direct</h2>
-        <p>[MOM FILL IN: how customers actually buy from you &mdash; markets, in-home pickup, delivery, custom orders. The friendlier the better.]</p>
-
-        <p>If we haven't met yet, the easiest first step is a phone call or an email. I'd rather know what you actually need than guess.</p>
-
-        <div class="contact-grid" style="margin-top: 2rem;">
-          <div class="contact-card">
-            <span class="label">Call or Text</span>
-            <a href="tel:+14062121373">(406) 212&#8209;1373</a>
-          </div>
-          <div class="contact-card">
-            <span class="label">Email</span>
-            <a href="mailto:hollychannel80@gmail.com">hollychannel80@gmail.com</a>
-          </div>
+    <section>
+      <div class="wrap" style="max-width: 38rem;">
+        <span class="eyebrow">Coming Up</span>
+        <h2>Where the pantry will be</h2>
+        <div data-coming-up>
+          <p style="font-style: italic;">Nothing on the calendar just yet &mdash; check back soon.</p>
         </div>
-
       </div>
     </section>
 
     <section class="cta-strip">
       <div class="wrap">
         <span class="eyebrow">Beyond the Pantry</span>
-        <h2>There's a deeper version of all this.</h2>
-        <p>The pantry handles the handmade. For the everyday products you'd buy anyway &mdash; cleaners, soaps, supplements, household basics &mdash; there's a quieter way to get the clean versions without the markup.</p>
-        <a href="#" class="btn" data-open-modal>Hear me out</a>
+        <h2>The part I usually explain in person.</h2>
+        <p>The jars are what I make. For everything else your house goes through &mdash; cleaners, soaps, the everyday basics &mdash; I found a cleaner, cheaper route, and I'm happy to show you it.</p>
+        <a href="#" class="btn" data-open-modal>Show me</a>
       </div>
     </section>
 
@@ -111,6 +100,53 @@
     </div>
   </dialog>
 
+  <script>
+    /* Meet Us content renderer — reads the JSON files Holly edits via /admin/ */
+    (function () {
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, (c) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+        }[c]));
+      }
+
+      fetch('content/meet.json')
+        .then((r) => r.json())
+        .then((meet) => {
+          if (meet.intro) {
+            document.querySelector('[data-meet-intro]').textContent = meet.intro;
+          }
+          if (meet.story) {
+            document.querySelector('[data-meet-story]').innerHTML = meet.story
+              .split(/\n\s*\n/)
+              .map((p) => '<p>' + esc(p.trim()) + '</p>')
+              .join('');
+          }
+          if (meet.headshot) {
+            const fig = document.querySelector('[data-meet-headshot]');
+            fig.querySelector('img').src = meet.headshot;
+            fig.hidden = false;
+          }
+        })
+        .catch(() => {}); // fallback copy already in the markup
+
+      fetch('content/coming-up.json')
+        .then((r) => r.json())
+        .then((data) => {
+          const events = (data.events || []).filter((e) => e.title);
+          if (!events.length) return; // keep the "nothing on the calendar" line
+          document.querySelector('[data-coming-up]').innerHTML = events
+            .map((e) =>
+              '<article style="border-top: 1px solid var(--hairline); padding: 1.4rem 0;">' +
+                '<h3 style="margin-bottom: 0.2rem;">' + esc(e.title) + '</h3>' +
+                (e.when ? '<div style="font-family: var(--sans); font-size: 0.85rem; letter-spacing: 0.06em;">' + esc(e.when) + '</div>' : '') +
+                (e.note ? '<p style="margin-top: 0.5rem;">' + esc(e.note) + '</p>' : '') +
+              '</article>'
+            )
+            .join('');
+        })
+        .catch(() => {});
+    })();
+  </script>
   <script src="app.js"></script>
 </body>
 </html>

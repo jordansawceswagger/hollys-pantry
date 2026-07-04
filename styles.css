@@ -393,9 +393,16 @@ h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.3rem; }
 .product {
   border: 1px solid var(--hairline);
   background-color: rgba(255, 255, 255, 0.4);
+  scroll-margin-top: 6rem; /* anchor jumps clear the floating header */
+}
+.product .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .product .photo {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   background-color: var(--paper-deep);
   display: flex;
   align-items: center;
@@ -417,6 +424,15 @@ h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.3rem; }
   color: var(--ink-mute);
 }
 .product .desc { font-size: 0.95rem; margin-top: 0.6rem; color: var(--ink-soft); }
+.product .find-at {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--hairline);
+  color: var(--ink-mute);
+}
 
 .category-header {
   margin-top: 3.5rem;
