@@ -43,6 +43,7 @@
     BIGFORK: BIGFORK,
     LOCATIONS: [],   // populated once `ready` resolves
     PRODUCTS: [],
+    REGIONS: [],
     productsLabel: productsLabel,
     productLinks: productLinks,
     pinSvg: pinSvg,
@@ -55,6 +56,8 @@
       var bySlug = {};
       (data.products || []).forEach(function (p) { bySlug[p.slug] = p; });
       H.PRODUCTS = data.products || [];
+      H.REGIONS = data.regions || [];
+      H.HOME_REGION = H.REGIONS[0] || { lat: BIGFORK[0], lng: BIGFORK[1], zoom: 13 };
       H.LOCATIONS = (data.stockists || []).map(function (s) {
         s.products = (s.carries || []).map(function (slug) {
           return bySlug[slug] || { slug: slug, name: slug };

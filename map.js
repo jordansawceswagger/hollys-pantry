@@ -5,11 +5,11 @@
   if (typeof L === 'undefined' || !window.HOLLYS) return; // Leaflet/data missing — leave a blank parchment panel
 
   window.HOLLYS.ready.then(function (H) {
-    var BIGFORK = H.BIGFORK;
     var LOCATIONS = H.LOCATIONS;
+    var HOME = H.HOME_REGION; // Bigfork — first region in stockists.json
 
     // --- Map ---
-    var map = L.map('leaflet-map', { scrollWheelZoom: true }).setView(BIGFORK, 13);
+    var map = L.map('leaflet-map', { scrollWheelZoom: true }).setView([HOME.lat, HOME.lng], HOME.zoom);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -28,6 +28,23 @@
       }
       loc._marker = m;
     });
+
+    // --- Region jump buttons (Bigfork / Kalispell / Whitefish ...) ---
+    var regionBox = document.getElementById('map-regions');
+    if (regionBox && H.REGIONS.length > 1) {
+      H.REGIONS.forEach(function (rg, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'region-btn' + (i === 0 ? ' is-active' : '');
+        b.textContent = rg.name;
+        b.addEventListener('click', function () {
+          map.setView([rg.lat, rg.lng], rg.zoom, { animate: true });
+          regionBox.querySelectorAll('.region-btn').forEach(function (x) { x.classList.remove('is-active'); });
+          b.classList.add('is-active');
+        });
+        regionBox.appendChild(b);
+      });
+    }
 
     // --- Filter dropdown: full product line (value = slug) ---
     var sel = document.getElementById('product-filter');
@@ -77,7 +94,7 @@
 
       // Frame the visible pins
       if (filter === 'all') {
-        map.setView(BIGFORK, 13, { animate: true });
+        map.setView([HOME.lat, HOME.lng], HOME.zoom, { animate: true });
       } else if (visible.length) {
         var bounds = L.latLngBounds(visible.map(function (l) { return [l.lat, l.lng]; }));
         if (bounds.isValid()) map.fitBounds(bounds, { padding: [50, 50], maxZoom: 15 });

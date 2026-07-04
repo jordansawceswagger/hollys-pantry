@@ -1,4 +1,9 @@
 {
+  "regions": [
+    { "slug": "bigfork", "name": "Bigfork", "lat": 48.0629, "lng": -114.0723, "zoom": 15 },
+    { "slug": "kalispell", "name": "Kalispell", "lat": 48.1958, "lng": -114.3129, "zoom": 13 },
+    { "slug": "whitefish", "name": "Whitefish", "lat": 48.4108, "lng": -114.3377, "zoom": 13 }
+  ],
   "products": [
     { "slug": "maple-nut-granola", "name": "Maple Nut Granola" },
     { "slug": "grammis-pancakes", "name": "Grammi's Pancakes" },
@@ -16,10 +21,10 @@
       "slug": "hollys-pantry",
       "name": "Holly's Pantry",
       "home": true,
-      "address": "Bigfork, Montana",
+      "address": "165 Monroe St, Bigfork, MT 59911",
       "hours": "By appointment",
-      "lat": 48.0633,
-      "lng": -114.0667,
+      "lat": 48.06390,
+      "lng": -114.07166,
       "carries": [
         "maple-nut-granola",
         "grammis-pancakes",
@@ -38,8 +43,8 @@
       "name": "Birch Provisions",
       "address": "475 Electric Ave, Suite 3 (upstairs), Bigfork, MT 59911",
       "hours": "Open daily, 8am–4pm",
-      "lat": 48.0636,
-      "lng": -114.0723,
+      "lat": 48.06180,
+      "lng": -114.07304,
       "carries": [
         "maple-nut-granola",
         "grammis-pancakes",

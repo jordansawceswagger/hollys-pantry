@@ -5,10 +5,11 @@
   if (!el || typeof L === 'undefined' || !window.HOLLYS) return; // graceful: leave the parchment frame
 
   window.HOLLYS.ready.then(function (H) {
+    var HOME = H.HOME_REGION;
     var map = L.map(el, {
       scrollWheelZoom: false,   // don't trap the page scroll inside the teaser
       zoomControl: true
-    }).setView(H.BIGFORK, 13);
+    }).setView([HOME.lat, HOME.lng], HOME.zoom);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
