@@ -21,7 +21,10 @@
       }
       if (!isPlaceholder(meet.story)) {
         var body = document.querySelector('[data-home-body]');
-        if (body) body.textContent = meet.story.split(/\n\s*\n/)[0];
+        if (body) {
+          body.innerHTML = esc(meet.story.split(/\n\s*\n/)[0])
+            .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        }
       }
       if (meet.headshot) {
         var box = document.querySelector('.holly-photo');

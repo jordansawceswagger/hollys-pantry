@@ -44,8 +44,8 @@
         <figure data-meet-headshot hidden style="margin: 0 0 2rem;">
           <img alt="Holly" style="width: 100%; display: block; border: 1px solid var(--hairline);">
         </figure>
-        <span class="eyebrow">The Story</span>
-        <h2>In her own words</h2>
+        <span class="eyebrow">From the family</span>
+        <h2>Our Story</h2>
         <div data-meet-story>
           <p>Story loading &mdash; if this line sticks around, <a href="mailto:hollychannel80@gmail.com">send me a note</a> and I'll tell it to you directly.</p>
         </div>
@@ -77,7 +77,7 @@
     <div class="wrap">
       <div class="footer-mark">Holly's Pantry</div>
       <div>Bigfork, Montana</div>
-      <div><a href="tel:+14062121373">(406) 212&#8209;1373</a> &middot; <a href="mailto:hollychannel80@gmail.com">hollychannel80@gmail.com</a></div>
+      <div><a href="tel:+14062612772">(406) 261&#8209;2772</a> &middot; <a href="mailto:hollychannel80@gmail.com">hollychannel80@gmail.com</a></div>
     </div>
   </footer>
 
@@ -93,7 +93,7 @@
         <p>If you'd like me to walk you through it &mdash; no pressure, no script &mdash; just say the word.</p>
       </div>
       <div class="modal-cta">
-        <a href="tel:+14062121373" class="btn">Call (406) 212&#8209;1373</a>
+        <a href="tel:+14062612772" class="btn">Call (406) 261&#8209;2772</a>
         <a href="mailto:hollychannel80@gmail.com?subject=Tell%20me%20about%20Melaleuca" class="btn btn-ghost">Email me</a>
       </div>
       <p class="fine-print">[MOM FILL IN: any required Melaleuca disclosure language, your enrollment ID, and the official membership benefits summary go here.]</p>
@@ -118,7 +118,7 @@
           if (meet.story) {
             document.querySelector('[data-meet-story]').innerHTML = meet.story
               .split(/\n\s*\n/)
-              .map((p) => '<p>' + esc(p.trim()) + '</p>')
+              .map((p) => '<p>' + esc(p.trim()).replace(/\*([^*]+)\*/g, '<em>$1</em>') + '</p>')
               .join('');
           }
           if (meet.headshot) {
