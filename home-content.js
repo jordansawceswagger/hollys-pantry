@@ -28,7 +28,7 @@
       }
       if (meet.headshot) {
         var box = document.querySelector('.holly-photo');
-        if (box) box.innerHTML = '<img src="' + esc(meet.headshot) + '" alt="Holly" style="width:100%;height:100%;object-fit:cover;display:block;">';
+        if (box) box.innerHTML = '<img src="' + esc(meet.headshot) + '" alt="Holly">'; // sizing via .holly-photo img CSS
       }
     })
     .catch(function () {});
