@@ -1,12 +1,12 @@
-// Holly's Pantry — /map page: Leaflet map + product filter + stockist sidebar.
+// Holly's Pantry - /map page: Leaflet map + product filter + stockist sidebar.
 // Stockist data + pin helpers come from the shared locations.js (window.HOLLYS),
 // which loads stockists.json and resolves HOLLYS.ready.
 (function () {
-  if (typeof L === 'undefined' || !window.HOLLYS) return; // Leaflet/data missing — leave a blank parchment panel
+  if (typeof L === 'undefined' || !window.HOLLYS) return; // Leaflet/data missing - leave a blank parchment panel
 
   window.HOLLYS.ready.then(function (H) {
     var LOCATIONS = H.LOCATIONS;
-    var HOME = H.HOME_REGION; // Bigfork — first region in stockists.json
+    var HOME = H.HOME_REGION; // Bigfork - first region in stockists.json
 
     // --- Map ---
     var map = L.map('leaflet-map', { scrollWheelZoom: true }).setView([HOME.lat, HOME.lng], HOME.zoom);
@@ -92,7 +92,7 @@
       });
 
       if (!visible.length) {
-        listEl.innerHTML = '<li class="loc-empty">No stockists carry that yet — check back soon.</li>';
+        listEl.innerHTML = '<li class="loc-empty">No stockists carry that yet - check back soon.</li>';
       }
 
       // Frame the visible pins

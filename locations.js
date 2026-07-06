@@ -1,4 +1,4 @@
-// Shared stockist data + rustic pin helpers — single source of truth for the
+// Shared stockist data + rustic pin helpers - single source of truth for the
 // homepage map preview (home-map.js) and the full /map page (map.js).
 // Data lives in stockists.json (editable via /admin/); this file loads and
 // normalizes it, exposing window.HOLLYS with a `ready` promise.

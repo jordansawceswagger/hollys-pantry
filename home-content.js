@@ -1,4 +1,4 @@
-// Homepage content bindings — fills the Meet Holly teaser, Coming Up rows,
+// Homepage content bindings - fills the Meet Holly teaser, Coming Up rows,
 // and map-preview stockist list from the same JSON files that drive the
 // Meet Us page, the /map page, and the /admin/ editor. Edit once, show everywhere.
 (function () {

@@ -1,4 +1,4 @@
-// Homepage "Find It Near You" teaser map — a small interactive Leaflet map
+// Homepage "Find It Near You" teaser map - a small interactive Leaflet map
 // embedded in the map-preview frame. Full filtering lives on /map (map.js).
 (function () {
   var el = document.getElementById('home-map');

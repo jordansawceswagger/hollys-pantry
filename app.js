@@ -1,9 +1,9 @@
-// Holly's Pantry — hero rotator + sticky nav + showcase carousel + modal + nav state
+// Holly's Pantry - hero rotator + sticky nav + showcase carousel + modal + nav state
 (function () {
 
   /* ----- Hero seasonal callout rotator -----
      EDIT THIS LIST: the words shown on the line under the logo.
-     Drop in current products or a seasonal note — Holly's call. */
+     Drop in current products or a seasonal note - Holly's call. */
   const CALLOUTS = [
     'Small-batch & made by hand',
     'Maple nut granola, baked this week',
