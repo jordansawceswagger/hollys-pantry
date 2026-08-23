@@ -50,6 +50,30 @@
     makeIcon: makeIcon
   };
 
+  // Stores saved without coordinates get placed automatically from their
+  // address (Nominatim / OpenStreetMap), cached per browser so we only ask once.
+  function geocode(s) {
+    var key = 'hollys-geo-v1:' + (s.slug || s.name || '') + ':' + (s.address || '');
+    try {
+      var c = JSON.parse(localStorage.getItem(key));
+      if (c && isFinite(c.lat)) { s.lat = c.lat; s.lng = c.lng; return Promise.resolve(); }
+    } catch (e) {}
+    if (!s.address) { s.lat = BIGFORK[0]; s.lng = BIGFORK[1]; return Promise.resolve(); }
+    return fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=' +
+        encodeURIComponent(s.address))
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res && res[0]) {
+          s.lat = +res[0].lat;
+          s.lng = +res[0].lon;
+          try { localStorage.setItem(key, JSON.stringify({ lat: s.lat, lng: s.lng })); } catch (e) {}
+        } else {
+          s.lat = BIGFORK[0]; s.lng = BIGFORK[1];
+        }
+      })
+      .catch(function () { s.lat = BIGFORK[0]; s.lng = BIGFORK[1]; });
+  }
+
   H.ready = fetch('stockists.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
@@ -64,6 +88,9 @@
         });
         return s;
       });
-      return H;
+      var pending = H.LOCATIONS
+        .filter(function (s) { return !(isFinite(s.lat) && isFinite(s.lng)); })
+        .map(geocode);
+      return Promise.all(pending).then(function () { return H; });
     });
 })();

@@ -33,43 +33,7 @@
     })
     .catch(function () {});
 
-  // --- Coming Up rows: next events from content/calendar.json ---
-  fetch('content/calendar.json')
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      var box = document.querySelector('[data-home-events]');
-      if (!box) return;
-      var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      function parse(s) {
-        var p = String(s).slice(0, 10).split('-');
-        return new Date(+p[0], +p[1] - 1, +p[2]);
-      }
-      var today = new Date();
-      today.setHours(0, 0, 0, 0);
-      var upcoming = (data.events || [])
-        .filter(function (e) {
-          if (!e.title || !e.date) return false;
-          var end = e.endDate ? parse(e.endDate) : parse(e.date);
-          return end >= today;
-        })
-        .sort(function (a, b) { return parse(a.date) - parse(b.date); })
-        .slice(0, 3);
-      if (!upcoming.length) return;
-      box.innerHTML = upcoming.map(function (e) {
-        var a = parse(e.date);
-        var b = e.endDate ? parse(e.endDate) : a;
-        var range = MONTHS[a.getMonth()] + ' ' + a.getDate();
-        if (b > a) {
-          range += b.getMonth() === a.getMonth()
-            ? '-' + b.getDate()
-            : ' - ' + MONTHS[b.getMonth()] + ' ' + b.getDate();
-        }
-        var when = range + (e.time ? ' · ' + e.time : '') + (e.where ? ' · ' + e.where : '');
-        return '<div class="cu-row"><span class="cu-event">' + esc(e.title) + '</span>' +
-               '<span class="cu-when">' + esc(when) + '</span></div>';
-      }).join('');
-    })
-    .catch(function () {});
+  // (Coming Up now renders as a clickable calendar via the shared calendar.js)
 
   // --- Map preview stockist list (stockists.json via locations.js) ---
   if (window.HOLLYS && window.HOLLYS.ready) {

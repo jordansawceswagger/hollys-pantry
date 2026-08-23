@@ -86,10 +86,10 @@ collections:
               - { label: "Store name", name: name, widget: string }
               - { label: "Their website (optional)", name: website, widget: string, required: false }
               - { label: "Is this your own home base?", name: home, widget: boolean, required: false, default: false }
-              - { label: "Address", name: address, widget: string }
+              - { label: "Address", name: address, widget: string, hint: "Full street address with town and state - the map finds the spot from this automatically." }
               - { label: "Hours", name: hours, widget: string }
-              - { label: "Latitude", name: lat, widget: number, value_type: float, hint: "Right-click the spot in Google Maps and the numbers appear - first one is latitude." }
-              - { label: "Longitude", name: lng, widget: number, value_type: float }
+              - { label: "Latitude (leave empty - fills itself from the address)", name: lat, widget: number, value_type: float, required: false }
+              - { label: "Longitude (leave empty)", name: lng, widget: number, value_type: float, required: false }
               - label: "Which products do they carry? (short names)"
                 name: carries
                 widget: list

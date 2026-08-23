@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://unpkg.com; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://unpkg.com; connect-src 'self' https://nominatim.openstreetmap.org; base-uri 'self'; form-action 'self'; object-src 'none'">
   <title>Holly's Pantry - Small-batch, non-toxic homegoods & pantry staples</title>
   <meta name="description" content="From Holly's Pantry to your kitchen - small-batch, non-toxic home and pantry goods, handmade in Bigfork, Montana. Find me at the market or reach out direct.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <!-- Leaflet (stable 1.9.4) for the homepage map preview -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 
@@ -224,14 +224,15 @@
 
             <div class="coming-up">
               <h3 class="cu-title">What's Coming Up</h3>
-              <div data-home-events>
-                <div class="cu-row">
-                  <span class="cu-event">August at the Pantry</span>
-                  <span class="cu-when">Open days 10-2 &middot; closed Aug 8-9 &middot; 165 Monroe St</span>
+              <div data-calendar>
+                <div class="cal-head">
+                  <button type="button" class="cal-nav" data-cal-prev aria-label="Previous month">&lsaquo;</button>
+                  <div class="cal-title" data-cal-title></div>
+                  <button type="button" class="cal-nav" data-cal-next aria-label="Next month">&rsaquo;</button>
                 </div>
-                <div class="cu-row">
-                  <span class="cu-event">More dates</span>
-                  <span class="cu-when">To be announced</span>
+                <div class="cal-grid" data-cal-grid></div>
+                <div data-cal-list>
+                  <p style="font-style: italic;">For current dates, call <a href="tel:+14062612772">(406) 261-2772</a>.</p>
                 </div>
               </div>
             </div>
@@ -342,9 +343,10 @@
   <!-- Leaflet + shared data + homepage teaser map -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="locations.js?v=3"></script>
+  <script src="locations.js?v=4"></script>
   <script src="home-map.js?v=3"></script>
-  <script src="home-content.js?v=5"></script>
+  <script src="home-content.js?v=6"></script>
+  <script src="calendar.js?v=1"></script>
 
   <script src="app.js?v=3"></script>
 </body>

@@ -473,8 +473,16 @@ h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.3rem; }
   font-family: var(--serif);
   font-size: 0.85rem;
 }
-.cal-cell--open { background-color: var(--paper-deep); font-weight: 600; }
+.cal-cell--open { background-color: var(--paper-deep); font-weight: 600; cursor: pointer; }
+.cal-cell--open:hover { background-color: #e6dcc6; }
+.cal-cell--sel { outline: 2px solid var(--ink); outline-offset: -2px; }
 .cal-cell--today span { border-bottom: 2px solid var(--ink); }
+.cal-showing {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  margin-top: 0.4rem;
+}
 
 /* Map region jump buttons (rendered by map.js from stockists.json regions) */
 .map-regions {

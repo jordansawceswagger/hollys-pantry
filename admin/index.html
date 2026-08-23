@@ -56,5 +56,37 @@
 
   <!-- Decap CMS. Content model lives in config.yml next to this file. -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    /* Housekeeping so Holly never has to: whenever the Calendar is published,
+       events whose last day has already passed are quietly removed, and the
+       rest are sorted by date. */
+    if (window.CMS) {
+      CMS.registerEventListener({
+        name: 'preSave',
+        handler: function (arg) {
+          try {
+            var entry = arg.entry;
+            var data = entry.get('data');
+            var path = entry.get('path') || '';
+            if (path.indexOf('calendar.json') === -1) return data;
+            var events = data.get('events');
+            if (!events) return data;
+            var d = new Date();
+            var pad = function (n) { return ('0' + n).slice(-2); };
+            var today = d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+            var kept = events
+              .filter(function (e) {
+                var last = String(e.get('endDate') || e.get('date') || '').slice(0, 10);
+                return last >= today;
+              })
+              .sortBy(function (e) { return String(e.get('date') || ''); });
+            return data.set('events', kept);
+          } catch (err) {
+            return arg.entry.get('data'); // never block a save over housekeeping
+          }
+        }
+      });
+    }
+  </script>
 </body>
 </html>
