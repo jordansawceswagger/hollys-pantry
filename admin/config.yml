@@ -6,8 +6,7 @@ backend:
   repo: jordansawceswagger/hollys-pantry
   branch: main
   # OAuth handshake runs through the Cloudflare Worker (see admin/SETUP.md).
-  # Replace with your deployed worker URL:
-  base_url: https://REPLACE-ME.workers.dev
+  base_url: https://hollys-pantry-oauth.jordansdevicesinfo.workers.dev
   commit_messages:
     update: "Holly edit: {{path}}"
     uploadMedia: "Holly upload: {{path}}"
