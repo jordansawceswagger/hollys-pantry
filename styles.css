@@ -424,6 +424,58 @@ h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.3rem; }
   color: var(--ink-mute);
 }
 .product .desc { font-size: 0.95rem; margin-top: 0.6rem; color: var(--ink-soft); }
+/* ---------- Calendar (meet.html, data from content/calendar.json) ---------- */
+.cal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.4rem 0 0.7rem;
+}
+.cal-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+}
+.cal-nav {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0.25rem 0.7rem;
+  background: none;
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  cursor: pointer;
+}
+.cal-nav:hover { background-color: var(--paper-deep); }
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-top: 1px solid var(--hairline);
+  border-left: 1px solid var(--hairline);
+  margin-bottom: 1.4rem;
+}
+.cal-dow {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-align: center;
+  padding: 0.35rem 0;
+  border-right: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  color: var(--ink-mute);
+  background-color: var(--paper-deep);
+}
+.cal-cell {
+  min-height: 44px;
+  padding: 4px 6px;
+  border-right: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  font-family: var(--serif);
+  font-size: 0.85rem;
+}
+.cal-cell--open { background-color: var(--paper-deep); font-weight: 600; }
+.cal-cell--today span { border-bottom: 2px solid var(--ink); }
+
 /* Map region jump buttons (rendered by map.js from stockists.json regions) */
 .map-regions {
   display: inline-flex;

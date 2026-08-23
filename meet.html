@@ -54,9 +54,15 @@
 
     <section>
       <div class="wrap" style="max-width: 38rem;">
-        <span class="eyebrow">Coming Up</span>
-        <h2>Where the pantry will be</h2>
-        <div data-coming-up>
+        <span class="eyebrow">The Calendar</span>
+        <h2>When and where to find her</h2>
+        <div class="cal-head">
+          <button type="button" class="cal-nav" data-cal-prev aria-label="Previous month">&lsaquo;</button>
+          <div class="cal-title" data-cal-title></div>
+          <button type="button" class="cal-nav" data-cal-next aria-label="Next month">&rsaquo;</button>
+        </div>
+        <div class="cal-grid" data-cal-grid></div>
+        <div data-cal-list>
           <p style="font-style: italic;">Nothing on the calendar just yet. Check back soon.</p>
         </div>
       </div>
@@ -129,20 +135,84 @@
         })
         .catch(() => {}); // fallback copy already in the markup
 
-      fetch('content/coming-up.json')
+      /* ----- Calendar: month grid + event list from content/calendar.json ----- */
+      fetch('content/calendar.json')
         .then((r) => r.json())
         .then((data) => {
-          const events = (data.events || []).filter((e) => e.title);
+          const events = (data.events || []).filter((e) => e.title && e.date);
           if (!events.length) return; // keep the "nothing on the calendar" line
-          document.querySelector('[data-coming-up]').innerHTML = events
-            .map((e) =>
-              '<article style="border-top: 1px solid var(--hairline); padding: 1.4rem 0;">' +
-                '<h3 style="margin-bottom: 0.2rem;">' + esc(e.title) + '</h3>' +
-                (e.when ? '<div style="font-family: var(--sans); font-size: 0.85rem; letter-spacing: 0.06em;">' + esc(e.when) + '</div>' : '') +
-                (e.note ? '<p style="margin-top: 0.5rem;">' + esc(e.note) + '</p>' : '') +
-              '</article>'
-            )
-            .join('');
+
+          const MONTHS = ['January','February','March','April','May','June',
+                          'July','August','September','October','November','December'];
+          const parse = (s) => {
+            const p = String(s).slice(0, 10).split('-');
+            return new Date(+p[0], +p[1] - 1, +p[2]);
+          };
+          const today = new Date();
+          let view = new Date(today.getFullYear(), today.getMonth(), 1);
+
+          function fmtRange(e) {
+            const a = parse(e.date);
+            const b = e.endDate ? parse(e.endDate) : a;
+            let s = MONTHS[a.getMonth()].slice(0, 3) + ' ' + a.getDate();
+            if (b > a) {
+              s += b.getMonth() === a.getMonth()
+                ? '-' + b.getDate()
+                : ' - ' + MONTHS[b.getMonth()].slice(0, 3) + ' ' + b.getDate();
+            }
+            return s;
+          }
+
+          function render() {
+            const y = view.getFullYear(), m = view.getMonth();
+            document.querySelector('[data-cal-title]').textContent = MONTHS[m] + ' ' + y;
+
+            const open = {};
+            events.forEach((e) => {
+              const a = parse(e.date);
+              const b = e.endDate ? parse(e.endDate) : a;
+              for (let d = new Date(a); d <= b; d.setDate(d.getDate() + 1)) {
+                if (d.getFullYear() === y && d.getMonth() === m) open[d.getDate()] = true;
+              }
+            });
+
+            let html = ['S','M','T','W','T','F','S']
+              .map((d) => '<div class="cal-dow">' + d + '</div>').join('');
+            const first = new Date(y, m, 1).getDay();
+            const days = new Date(y, m + 1, 0).getDate();
+            for (let i = 0; i < first; i++) html += '<div class="cal-cell cal-cell--pad"></div>';
+            for (let d = 1; d <= days; d++) {
+              const isToday = d === today.getDate() && m === today.getMonth() && y === today.getFullYear();
+              html += '<div class="cal-cell' + (open[d] ? ' cal-cell--open' : '') +
+                      (isToday ? ' cal-cell--today' : '') + '"><span>' + d + '</span></div>';
+            }
+            document.querySelector('[data-cal-grid]').innerHTML = html;
+
+            const monthEvents = events
+              .filter((e) => {
+                const a = parse(e.date), b = e.endDate ? parse(e.endDate) : a;
+                return a <= new Date(y, m + 1, 0) && b >= new Date(y, m, 1);
+              })
+              .sort((p, q) => parse(p.date) - parse(q.date));
+            document.querySelector('[data-cal-list]').innerHTML = monthEvents.length
+              ? monthEvents.map((e) =>
+                  '<article style="border-top: 1px solid var(--hairline); padding: 1.1rem 0;">' +
+                    '<h3 style="margin-bottom: 0.2rem;">' + esc(e.title) + '</h3>' +
+                    '<div style="font-family: var(--sans); font-size: 0.85rem; letter-spacing: 0.06em;">' +
+                      esc(fmtRange(e)) + (e.time ? ' &middot; ' + esc(e.time) : '') +
+                      (e.where ? ' &middot; ' + esc(e.where) : '') + '</div>' +
+                    (e.note ? '<p style="margin-top: 0.5rem;">' + esc(e.note) + '</p>' : '') +
+                  '</article>').join('')
+              : '<p style="font-style: italic; margin-top: 0.8rem;">Nothing this month. Check the next one.</p>';
+          }
+
+          document.querySelector('[data-cal-prev]').addEventListener('click', () => {
+            view = new Date(view.getFullYear(), view.getMonth() - 1, 1); render();
+          });
+          document.querySelector('[data-cal-next]').addEventListener('click', () => {
+            view = new Date(view.getFullYear(), view.getMonth() + 1, 1); render();
+          });
+          render();
         })
         .catch(() => {});
     })();

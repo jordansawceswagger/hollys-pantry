@@ -1,0 +1,9 @@
+{
+  "events": [
+    { "title": "Open at the Pantry", "date": "2026-08-01", "endDate": "2026-08-03", "time": "10-2", "where": "165 Monroe St, Bigfork", "note": "" },
+    { "title": "Open at the Pantry", "date": "2026-08-10", "endDate": "", "time": "10-2", "where": "165 Monroe St, Bigfork", "note": "" },
+    { "title": "Open at the Pantry", "date": "2026-08-15", "endDate": "2026-08-17", "time": "10-2", "where": "165 Monroe St, Bigfork", "note": "" },
+    { "title": "Open at the Pantry", "date": "2026-08-22", "endDate": "2026-08-24", "time": "10-2", "where": "165 Monroe St, Bigfork", "note": "" },
+    { "title": "Open at the Pantry", "date": "2026-08-29", "endDate": "2026-08-31", "time": "10-2", "where": "165 Monroe St, Bigfork", "note": "" }
+  ]
+}
