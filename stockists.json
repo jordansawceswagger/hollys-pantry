@@ -1,20 +1,72 @@
 {
   "regions": [
-    { "slug": "bigfork", "name": "Bigfork", "lat": 48.0629, "lng": -114.0723, "zoom": 15 },
-    { "slug": "kalispell", "name": "Kalispell", "lat": 48.1958, "lng": -114.3129, "zoom": 13 },
-    { "slug": "whitefish", "name": "Whitefish", "lat": 48.4108, "lng": -114.3377, "zoom": 13 }
+    {
+      "slug": "bigfork",
+      "name": "Bigfork",
+      "lat": 48.0629,
+      "lng": -114.0723,
+      "zoom": 15
+    },
+    {
+      "slug": "kalispell",
+      "name": "Kalispell",
+      "lat": 48.1958,
+      "lng": -114.3129,
+      "zoom": 13
+    },
+    {
+      "slug": "whitefish",
+      "name": "Whitefish",
+      "lat": 48.4108,
+      "lng": -114.3377,
+      "zoom": 13
+    }
   ],
   "products": [
-    { "slug": "maple-nut-granola", "name": "Maple Nut Granola" },
-    { "slug": "grammis-pancakes", "name": "Grammi's Pancakes" },
-    { "slug": "bouillon-powder", "name": "Bouillon Powder" },
-    { "slug": "non-beef-bouillon", "name": "Non Beef Bouillon" },
-    { "slug": "taco-seasoning", "name": "Taco Seasoning" },
-    { "slug": "brown-gravy", "name": "Brown Gravy" },
-    { "slug": "ranch-mix", "name": "Ranch Mix" },
-    { "slug": "veggie-dip", "name": "Veggie Dip" },
-    { "slug": "dark-brown-sugar", "name": "Dark Brown Sugar" },
-    { "slug": "fresh-ground-flour", "name": "Fresh Ground Flour" }
+    {
+      "slug": "maple-nut-granola",
+      "name": "Maple Nut Granola"
+    },
+    {
+      "slug": "grammis-pancakes",
+      "name": "Grammi's Pancakes"
+    },
+    {
+      "slug": "bouillon-powder",
+      "name": "Bouillon Powder"
+    },
+    {
+      "slug": "non-beef-bouillon",
+      "name": "Non Beef Bouillon"
+    },
+    {
+      "slug": "taco-seasoning",
+      "name": "Taco Seasoning"
+    },
+    {
+      "slug": "brown-gravy",
+      "name": "Brown Gravy"
+    },
+    {
+      "slug": "ranch-mix",
+      "name": "Ranch Mix"
+    },
+    {
+      "slug": "veggie-dip",
+      "name": "Veggie Dip"
+    },
+    {
+      "slug": "dark-brown-sugar",
+      "name": "Dark Brown Sugar"
+    },
+    {
+      "slug": "fresh-ground-flour",
+      "name": "Fresh Ground Flour"
+    },
+    {
+      "slug": "brownie-mix",
+      "name": "Brownie Mix"
+    }
   ],
   "stockists": [
     {
@@ -23,7 +75,7 @@
       "home": true,
       "address": "165 Monroe St, Bigfork, MT 59911",
       "hours": "By appointment",
-      "lat": 48.06390,
+      "lat": 48.0639,
       "lng": -114.07166,
       "carries": [
         "maple-nut-granola",
@@ -44,7 +96,7 @@
       "website": "https://www.birchprovisions.com",
       "address": "475 Electric Ave, Suite 3 (upstairs), Bigfork, MT 59911",
       "hours": "Open daily, 8am–4pm",
-      "lat": 48.06180,
+      "lat": 48.0618,
       "lng": -114.07304,
       "carries": [
         "maple-nut-granola",
