@@ -4,9 +4,56 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Holly's Pantry — Admin</title>
+  <title>Holly's Pantry - Website Notebook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ---- Holly's welcome banner (always on top of the editor) ---- */
+    #holly-banner {
+      background: #faf8f3;
+      border-bottom: 1px solid rgba(10,10,10,0.22);
+      padding: 14px 18px 12px;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+    }
+    #holly-banner .mark {
+      font-family: 'Petit Formal Script', cursive;
+      font-size: 26px;
+      color: #0a0a0a;
+      line-height: 1.2;
+    }
+    #holly-banner .how {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: #444;
+      margin-top: 2px;
+    }
+
+    /* ---- Gentle overrides so the editor feels like the site, not software ---- */
+    body { background: #f1ebdd !important; }
+    /* bigger, calmer field labels and hints */
+    label, [class*="FieldLabel"], [class*="ControlHint"] {
+      font-size: 15px !important;
+      line-height: 1.4 !important;
+    }
+    input, textarea, select { font-size: 16px !important; }
+    /* login screen: big friendly button */
+    [class*="AuthenticationPage"] button,
+    button[class*="login"] {
+      font-size: 17px !important;
+      padding: 14px 28px !important;
+    }
+  </style>
 </head>
 <body>
+  <div id="holly-banner">
+    <div class="mark">Holly's Pantry</div>
+    <div class="how">Your website notebook. Change what you need, press <b>Publish</b>, and the website
+    updates itself in about a minute. Nothing here can break in a way the boys can't undo.</div>
+  </div>
+
   <!-- Decap CMS. Content model lives in config.yml next to this file. -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>

@@ -1,4 +1,4 @@
-# Decap CMS config — Holly's Pantry
+# Decap CMS config - Holly's Pantry
 # Docs: https://decapcms.org/docs/configuration-options/
 
 backend:
@@ -20,28 +20,10 @@ logo_url: https://hollyspantry.org/assets/cover_herbs_transparent.png
 
 collections:
   - name: pages
-    label: "Site Content"
+    label: "Your Website"
     files:
-      - name: meet
-        label: "Meet Us page"
-        file: "content/meet.json"
-        fields:
-          - label: "Intro line"
-            name: intro
-            widget: string
-            hint: "The short line under the page title."
-          - label: "Holly's story"
-            name: story
-            widget: text
-            hint: "Write naturally. Leave a blank line between paragraphs."
-          - label: "Headshot"
-            name: headshot
-            widget: image
-            required: false
-            hint: "A photo of you. Landscape or portrait both work."
-
       - name: calendar
-        label: "Calendar (open days, classes, markets)"
+        label: "The Calendar - open days, classes & markets"
         file: "content/calendar.json"
         fields:
           - label: "Events"
@@ -49,38 +31,66 @@ collections:
             widget: list
             summary: "{{fields.title}} - {{fields.date}}"
             fields:
-              - { label: "Title", name: title, widget: string, hint: "e.g. Open at the Pantry, Sourdough Class, Farmers Market" }
+              - { label: "What is it?", name: title, widget: string, hint: "e.g. Open at the Pantry, Sourdough Class, Farmers Market" }
               - { label: "First day", name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false }
-              - { label: "Last day (leave empty for one-day events)", name: endDate, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false, required: false, default: "" }
-              - { label: "Time", name: time, widget: string, required: false, hint: "Plain words: 10-2, or 6pm" }
-              - { label: "Where", name: where, widget: string, required: false, default: "165 Monroe St, Bigfork" }
-              - { label: "Note", name: note, widget: text, required: false, hint: "Anything extra - what to bring, how to sign up." }
+              - { label: "Last day (skip this for one-day events)", name: endDate, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false, required: false, default: "" }
+              - { label: "What time?", name: time, widget: string, required: false, hint: "Plain words: 10-2, or 6pm" }
+              - { label: "Where?", name: where, widget: string, required: false, default: "165 Monroe St, Bigfork" }
+              - { label: "Anything else people should know?", name: note, widget: text, required: false, hint: "What to bring, how to sign up, that kind of thing." }
+
+      - name: meet
+        label: "Meet Us - the story & your photo"
+        file: "content/meet.json"
+        fields:
+          - label: "The line under 'Meet Holly'"
+            name: intro
+            widget: string
+          - label: "The story"
+            name: story
+            widget: text
+            hint: "Write naturally. Leave a blank line between paragraphs. Stars around a word make it *slanted*."
+          - label: "Your photo"
+            name: headshot
+            widget: image
+            required: false
 
       - name: stockists
-        label: "Map — stores & products"
+        label: "The Map - stores that carry your products"
         file: "stockists.json"
         fields:
-          - label: "Products (master list)"
+          - label: "Regions (map jump buttons - leave these alone unless adding a new town)"
+            name: regions
+            widget: list
+            summary: "{{fields.name}}"
+            collapsed: true
+            fields:
+              - { label: "Slug", name: slug, widget: string }
+              - { label: "Name", name: name, widget: string }
+              - { label: "Latitude", name: lat, widget: number, value_type: float }
+              - { label: "Longitude", name: lng, widget: number, value_type: float }
+              - { label: "Zoom", name: zoom, widget: number, value_type: int }
+          - label: "Products (the master list - ask Jordan before changing the short names)"
             name: products
             widget: list
             summary: "{{fields.name}}"
-            hint: "The slug must match the product's card on The Pantry page. Ask Jordan before changing slugs."
+            collapsed: true
             fields:
-              - { label: "Slug", name: slug, widget: string }
+              - { label: "Short name (no spaces, like maple-nut-granola)", name: slug, widget: string }
               - { label: "Name", name: name, widget: string }
           - label: "Stores"
             name: stockists
             widget: list
             summary: "{{fields.name}}"
             fields:
-              - { label: "Slug", name: slug, widget: string, hint: "Short id, lowercase with hyphens: birch-provisions" }
-              - { label: "Name", name: name, widget: string }
-              - { label: "Home base?", name: home, widget: boolean, required: false, default: false }
+              - { label: "Short name (no spaces, like birch-provisions)", name: slug, widget: string }
+              - { label: "Store name", name: name, widget: string }
+              - { label: "Their website (optional)", name: website, widget: string, required: false }
+              - { label: "Is this your own home base?", name: home, widget: boolean, required: false, default: false }
               - { label: "Address", name: address, widget: string }
               - { label: "Hours", name: hours, widget: string }
-              - { label: "Latitude", name: lat, widget: number, value_type: float, hint: "Right-click the spot in Google Maps to copy coordinates." }
+              - { label: "Latitude", name: lat, widget: number, value_type: float, hint: "Right-click the spot in Google Maps and the numbers appear - first one is latitude." }
               - { label: "Longitude", name: lng, widget: number, value_type: float }
-              - label: "Carries (product slugs)"
+              - label: "Which products do they carry? (short names)"
                 name: carries
                 widget: list
-                field: { label: "Product slug", name: slug, widget: string }
+                field: { label: "Product short name", name: slug, widget: string }
