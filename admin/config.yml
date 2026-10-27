@@ -37,6 +37,10 @@ collections:
               - { label: "What time?", name: time, widget: string, required: false, hint: "Plain words: 10-2, or 6pm" }
               - { label: "Where?", name: where, widget: string, required: false, default: "165 Monroe St, Bigfork" }
               - { label: "Anything else people should know?", name: note, widget: text, required: false, hint: "What to bring, how to sign up, that kind of thing." }
+              - { label: "Is this a class people sign up for?", name: isClass, widget: boolean, required: false, default: false, hint: "Turn on for classes. They show up on the Classes page with a Save my seat button." }
+              - { label: "Price per person (classes only)", name: price, widget: string, required: false, hint: "Plain words, like $45" }
+              - { label: "Spots left (classes only)", name: spotsLeft, widget: number, value_type: int, required: false, hint: "Change this as people sign up. 0 shows the class as full." }
+              - { label: "Payment link (classes only - ask Jordan)", name: payLink, widget: string, required: false, hint: "Leave empty and Save my seat sends you a text instead." }
 
       - name: meet
         label: "Meet Us - the story & your photo"

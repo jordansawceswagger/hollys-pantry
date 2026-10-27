@@ -38,6 +38,26 @@
     }
     return s;
   }
+  var PHONE = '+14062612772';
+  function seatHref(e) {
+    if (e.payLink) return e.payLink;
+    var msg = 'Hi Holly, please save me a seat at ' + e.title + ' on ' + fmtRange(e) + '.';
+    return 'sms:' + PHONE + '?&body=' + encodeURIComponent(msg);
+  }
+  function waitHref(e) {
+    var msg = 'Hi Holly, please put me on the waitlist for ' + e.title + ' on ' + fmtRange(e) + '.';
+    return 'sms:' + PHONE + '?&body=' + encodeURIComponent(msg);
+  }
+  function classBits(e) {
+    if (!e.isClass) return '';
+    var full = e.spotsLeft === 0;
+    var facts = ['Class', e.price, full ? 'Full' : (typeof e.spotsLeft === 'number' ? e.spotsLeft + (e.spotsLeft === 1 ? ' spot left' : ' spots left') : '')]
+      .filter(Boolean).map(esc).join(' &middot; ');
+    return '<div class="cal-class">' + facts + '</div>' +
+      (full
+        ? '<p class="cal-class-note">Full. <a href="' + esc(waitHref(e)) + '">Get on the waitlist</a></p>'
+        : '<p style="margin-top: 0.7rem;"><a class="btn" href="' + esc(seatHref(e)) + '">Save my seat</a></p>');
+  }
   function eventHtml(e) {
     return '<article style="border-top: 1px solid var(--hairline); padding: 1.1rem 0;">' +
       '<h3 style="margin-bottom: 0.2rem;">' + esc(e.title) + '</h3>' +
@@ -45,6 +65,7 @@
         esc(fmtRange(e)) + (e.time ? ' &middot; ' + esc(e.time) : '') +
         (e.where ? ' &middot; ' + esc(e.where) : '') + '</div>' +
       (e.note ? '<p style="margin-top: 0.5rem;">' + esc(e.note) + '</p>' : '') +
+      classBits(e) +
     '</article>';
   }
 
@@ -138,6 +159,14 @@
     .then(function (r) { return r.json(); })
     .then(function (data) {
       var events = (data.events || []).filter(function (e) { return e.title && e.date; });
+      // Classes page: upcoming classes only, soonest first
+      var today = new Date(); today.setHours(0, 0, 0, 0);
+      var upcoming = events
+        .filter(function (e) { return e.isClass && parse(e.endDate || e.date) >= today; })
+        .sort(function (a, b) { return parse(a.date) - parse(b.date); });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-class-list]'), function (c) {
+        if (upcoming.length) c.innerHTML = upcoming.map(eventHtml).join('');
+      });
       if (!events.length) return; // leave whatever fallback text is in the markup
       Array.prototype.forEach.call(document.querySelectorAll('[data-calendar]'), function (c) {
         mount(c, events);
