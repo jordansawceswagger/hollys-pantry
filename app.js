@@ -95,6 +95,18 @@
         }
       });
     });
+    // "Wellness" in the nav goes to pantry.html#wellness and opens the note
+    const openIfWellness = () => {
+      if (window.location.hash === '#wellness' && !modal.open) {
+        if (typeof modal.showModal === 'function') modal.showModal();
+        else modal.setAttribute('open', '');
+      }
+    };
+    openIfWellness();
+    window.addEventListener('hashchange', openIfWellness);
+    modal.addEventListener('close', () => {
+      if (window.location.hash === '#wellness') history.replaceState(null, '', window.location.pathname + window.location.search);
+    });
     modal.addEventListener('click', (e) => {
       if (e.target.matches('[data-close-modal]') || e.target === modal) {
         modal.close();
@@ -106,8 +118,11 @@
   const path = window.location.pathname.split('/').pop() || 'index.html';
   if (!isHome) {
     document.querySelectorAll('.nav a').forEach((a) => {
-      const href = (a.getAttribute('href') || '').split('#')[0];
-      if (href === path) a.classList.add('active');
+      const raw = a.getAttribute('href') || '';
+      const href = raw.split('#')[0];
+      const hash = raw.includes('#') ? '#' + raw.split('#')[1] : '';
+      // pantry.html and pantry.html#wellness share a file: only the exact match lights up
+      if (href === path && hash === (hash ? window.location.hash : '')) a.classList.add('active');
     });
   }
 })();
